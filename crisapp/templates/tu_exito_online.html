@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title> Importancia de Tener un Sitio Web </title>
+   <style>
+
+/* Global Styles */
+body {
+  font-family: 'Lora', serif;
+  background: linear-gradient(135deg, #2980b9, #8e44ad);
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 50px 0;
+}
+
+.main-title {
+  font-size: 3em;
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ecf0f1;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.intro-text {
+  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 40px;
+  color: #ecf0f1;
+}
+
+.section {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  margin-bottom: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.section:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.fancy-box {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.fancy-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 0.4;
+  z-index: -1;
+}
+
+.section-title {
+  font-size: 2em;
+  color: #2980b9;
+  margin-bottom: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.fancy-text {
+  position: relative;
+  display: inline-block;
+  color: #2980b9;
+  padding-bottom: 4px;
+}
+
+.fancy-text::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: #2980b9;
+  left: 0;
+  bottom: -5px;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.fancy-text:hover::after {
+  transform: scaleX(1);
+}
+
+.section-text {
+  font-size: 1.2em;
+  line-height: 1.8;
+  color: #2c3e50;
+  text-align: justify;
+  font-weight: 400;
+}
+
+/* Hover Effects */
+.button {
+  background: #2980b9;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background: #3498db;
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 2.2em;
+  }
+
+  .section-title {
+    font-size: 1.6em;
+  }
+
+  .section-text {
+    font-size: 1.1em;
+  }
+
+  .container {
+    width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 1.8em;
+  }
+
+  .section-title {
+    font-size: 1.4em;
+  }
+
+  .section-text {
+    font-size: 1em;
+  }
+}
+
+
+
+   </style>
+</head>
+<body>
+    
+
+  {% load static %}
+  
+  {% block content %}
+  <div class="container">
+    <h1 class="main-title">¿Por qué tu negocio necesita un sitio web?</h1>
+    <p class="intro-text">Lo primero que hacen los turistas para encontrar lo que necesitan es ir a Google y buscarlo. Tener un sitio web les permite ser encontrados fácilmente en línea y conectar con potenciales clientes que buscan lo que tu negocio ofrece.</p>
+
+    <section class="section fancy-box">
+      <h2 class="section-title fancy-text">Restaurantes y Marisquerías</h2>
+      <p class="section-text">Puerto Vallarta es conocido por su gastronomía, especialmente los mariscos. Un sitio web permite a los restaurantes mostrar su menú, aceptar reservas en línea y mejorar su visibilidad en búsquedas locales, atrayendo tanto a turistas como a residentes. También pueden integrar pagos en línea con muy bajas comisiones del 4%, mostrar horarios de apertura y cierre, y ofrecer varios botones de contacto para facilitar la comunicación con los clientes. Además, al tener su propio sitio web, pueden mostrar su contenido y productos con un estilo 100% personalizado y único, lo que les permite diferenciarse de la competencia.</p>
+    </section>
+
+    <section class="section fancy-box">
+      <h2 class="section-title fancy-text">Bienes Raíces</h2>
+      <p class="section-text">Puerto Vallarta es un destino popular para inversiones inmobiliarias. Las agencias pueden usar un sitio web para listar propiedades, ofrecer recorridos virtuales y facilitar el contacto con clientes. También pueden integrar pagos en línea para reservas de propiedades con solo un 4% de comisión, mostrar horarios de atención y ofrecer múltiples formas de contacto. Un sitio web les permite presentar sus propiedades de manera atractiva y con un diseño totalmente personalizado que refleje la calidad de su oferta inmobiliaria.</p>
+    </section>
+
+    <section class="section fancy-box">
+      <h2 class="section-title fancy-text">Hoteles y Rentas Vacacionales</h2>
+      <p class="section-text">Los hoteles y rentas vacacionales dependen de su presencia en línea para atraer turistas. Un sitio web permite reservas directas, mostrar habitaciones, brindar recorridos virtuales y ofrecer información clave sobre el hospedaje. Además, facilita pagos en línea con solo un 4% de comisión, permite organizar eventos especiales, mostrar horarios de atención y proporcionar múltiples botones de contacto. Al contar con un sitio web propio, pueden presentar su oferta con una identidad visual totalmente única y personalizada.</p>
+    </section>
+
+    <section class="section fancy-box">
+      <h2 class="section-title fancy-text">Bares y Clubes Nocturnos</h2>
+      <p class="section-text">La vida nocturna en Puerto Vallarta es vibrante. Un sitio web ayuda a bares y clubes a promocionar eventos, compartir horarios y vender boletos en línea, además de captar clientes mediante redes sociales y marketing digital. También pueden integrar pagos en línea con una comisión del 4%, mostrar horarios de apertura y ofrecer múltiples botones de contacto para reservaciones y consultas. Tener un sitio web les permite mostrar su ambiente, productos y promociones de una manera completamente única y adaptada a su estilo.</p>
+    </section>
+
+    <section class="section fancy-box">
+      <h2 class="section-title fancy-text">Tour Operadores y Actividades Turísticas</h2>
+      <p class="section-text">Desde tours en barco hasta excursiones en la selva, los operadores turísticos necesitan presencia en línea para captar clientes y ofrecer reservas en línea. Un sitio web permite mostrar paquetes, precios y testimonios de clientes. Además, pueden aceptar pagos en línea con solo un 4% de comisión, organizar eventos especiales y proporcionar varios medios de contacto para facilitar la comunicación con los turistas. Un sitio web les brinda la oportunidad de mostrar sus experiencias y productos de forma 100% personalizada, reflejando la esencia de sus servicios.</p>
+    </section>
+
+    <section class="section fancy-box">
+      <h2 class="section-title fancy-text">Gimnasios y Centros de Yoga</h2>
+      <p class="section-text">Con el crecimiento del turismo recreativo, los gimnasios y estudios de yoga en Puerto Vallarta pueden beneficiarse de un sitio web para mostrar clases, reservas y membresías, atrayendo tanto a residentes como a visitantes. También pueden gestionar pagos en línea con solo un 4% de comisión, organizar eventos y clases especiales, mostrar horarios y ofrecer múltiples formas de contacto. Tener un sitio web les permite presentar su enfoque único de bienestar con una apariencia completamente personalizada y adaptada a su estilo.</p>
+    </section>
+
+    <section class="section fancy-box">
+      <h2 class="section-title fancy-text">Servicios Médicos y Clínicas</h2>
+      <p class="section-text">El turismo médico está creciendo en Puerto Vallarta. Un sitio web ayuda a médicos y clínicas a ofrecer información de tratamientos, agendar citas y generar confianza en pacientes nacionales e internacionales. Además, pueden integrar pagos en línea con una comisión baja del 4%, mostrar horarios de consulta y proporcionar varias opciones de contacto para facilitar la comunicación. Un sitio web permite a estos negocios mostrar su especialidad y servicios de una forma única y profesional.</p>
+    </section>
+
+    <section class="section fancy-box">
+      <h2 class="section-title fancy-text">Escuelas de Buceo y Deportes Acuáticos</h2>
+      <p class="section-text">Con sus hermosas playas, Puerto Vallarta es ideal para el buceo y otros deportes acuáticos. Un sitio web permite a las escuelas de buceo mostrar cursos, certificaciones y paquetes turísticos para atraer clientes. Además, pueden aceptar pagos en línea con una comisión del 4%, gestionar la venta de boletos para actividades, mostrar horarios de operación y proporcionar múltiples botones de contacto. Con su propio sitio web, pueden crear una experiencia visual única para sus clientes, mostrando la emoción y belleza de las actividades acuáticas que ofrecen.</p>
+    </section>
+
+    <section class="section fancy-box">
+      <h2 class="section-title fancy-text">Tiendas de Artesanías y Souvenirs</h2>
+      <p class="section-text">Las tiendas locales pueden ampliar su mercado con un sitio web, permitiendo a los turistas comprar recuerdos incluso después de su visita. Además, facilita pagos en línea con una comisión del 4%, permite envíos internacionales, muestra horarios de apertura y ofrece diversos botones de contacto para mejorar la atención al cliente. Con un sitio web propio, las tiendas pueden presentar sus productos de manera única y crear una experiencia de compra personalizada para sus clientes.</p>
+    </section>
+
+    <!-- New Sections Added Below -->
+
+    <section class="section fancy-box">
+      <h2 class="section-title fancy-text">Agencias de Viajes</h2>
+      <p class="section-text">Las agencias de viajes pueden usar un sitio web para mostrar paquetes turísticos, itinerarios personalizados y ofrecer la posibilidad de realizar reservas en línea. Además, pueden integrar pagos en línea con solo un 4% de comisión, mostrar testimonios de clientes y proporcionar opciones de contacto para consultas. Con un sitio web propio, pueden destacarse entre la competencia y atraer tanto a turistas locales como internacionales.</p>
+    </section>
+
+    <section class="section fancy-box">
+      <h2 class="section-title fancy-text">Spa</h2>
+      <p class="section-text">Los spas pueden beneficiarse enormemente de un sitio web al permitir a los clientes ver los servicios que ofrecen, reservar citas en línea y pagar con facilidad. Además, pueden integrar opciones de contacto rápido y mostrar sus horarios de apertura. Un sitio web les da una presencia en línea profesional y una forma efectiva de mostrar sus ofertas exclusivas de relajación y bienestar.</p>
+    </section>
+
+    <section class="section fancy-box">
+      <h2 class="section-title fancy-text">Abogados</h2>
+      <p class="section-text">Los abogados y despachos legales pueden usar un sitio web para ofrecer consultas, publicar servicios legales, y generar confianza en potenciales clientes. Integrar pagos en línea con una comisión baja del 4%, mostrar testimonios y facilitar el contacto con clientes potenciales es solo una parte de lo que un sitio web puede hacer para ayudar a estos negocios a destacarse.</p>
+    </section>
+
+    <section class="section fancy-box">
+      <h2 class="section-title fancy-text">Estéticas</h2>
+      <p class="section-text">Las estéticas pueden utilizar un sitio web para mostrar sus servicios de belleza, precios y promociones especiales. Permitir reservas en línea, mostrar testimonios de clientes y gestionar pagos de manera eficiente es clave para atraer nuevos clientes. Con un sitio web bien diseñado, las estéticas pueden ofrecer una experiencia personalizada y destacarse en el mercado.</p>
+    </section>
+
+    <section class="section fancy-box">
+      <h2 class="section-title fancy-text">Fundaciones</h2>
+      <p class="section-text">Las fundaciones pueden utilizar un sitio web para promover sus causas, recaudar fondos en línea y difundir su misión. Además, un sitio web facilita la comunicación con donantes y voluntarios, muestra eventos y proyectos y ofrece una forma sencilla de donar. Tener una presencia en línea profesional también puede generar confianza y atraer más apoyo.</p>
+    </section>
+
+    <section class="section fancy-box">
+      <h2 class="section-title fancy-text">Performers</h2>
+      <p class="section-text">Los artistas, músicos y performers pueden mostrar su portafolio en línea, permitir a los fans comprar entradas para sus shows, y ofrecer merchandising a través de su sitio web. También pueden integrar pagos en línea, publicar su agenda de eventos y recibir consultas o solicitudes de contratación. Un sitio web les permite construir una marca personal sólida y conectar mejor con su audiencia.</p>
+    </section>
+
+    <section class="section fancy-box">
+      <h2 class="section-title fancy-text">Todo Tipo de Tiendas Online</h2>
+      <p class="section-text">Las tiendas en línea pueden utilizar un sitio web para vender productos, gestionar inventarios, y ofrecer opciones de pago seguras y rápidas. Además, un sitio web propio les permite tener un control total sobre la experiencia de compra y diferenciarse en un mercado competitivo. La posibilidad de integrar promociones, ofertas exclusivas y métodos de contacto hace que un sitio web sea esencial para cualquier tienda en línea.</p>
+    </section>
+
+  </div>
+{% endblock %}
+
+
+
+
+
+  
+
+
+</body>
+</html>

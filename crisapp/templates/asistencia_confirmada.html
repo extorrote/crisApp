@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Asistencia Confirmada! | Cotorreo de Rancho</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rye&family=Bebas+Neue&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --cream: #f1e6c9;
+            --cream-2: #e6d6ac;
+            --brown-dark: #2b1810;
+            --brown: #4a2f1f;
+            --rust: #b1462b;
+            --rust-dark: #8a341f;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--cream);
+            background-image:
+                radial-gradient(circle at 20% 10%, rgba(177,70,43,0.06), transparent 40%),
+                radial-gradient(circle at 80% 90%, rgba(43,24,16,0.08), transparent 45%);
+            color: var(--brown-dark);
+            font-family: "Cormorant Garamond", serif;
+            font-size: 1.15rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .caja {
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            background: rgba(255,255,255,0.4);
+            border: 3px solid var(--rust);
+            border-radius: 18px;
+            padding: 45px 35px;
+            box-shadow: 0 15px 40px rgba(43,24,16,0.25);
+        }
+
+        .caja .icono {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-family: "Rye", serif;
+            font-size: 2rem;
+            color: var(--brown-dark);
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .frase {
+            font-style: italic;
+            color: var(--rust-dark);
+            font-weight: 600;
+        }
+
+        a.volver {
+            display: inline-block;
+            margin-top: 20px;
+            font-family: "Bebas Neue", sans-serif;
+            letter-spacing: 1.5px;
+            color: var(--cream);
+            background: var(--rust);
+            padding: 12px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background 0.25s ease;
+        }
+
+        a.volver:hover {
+            background: var(--rust-dark);
+        }
+    </style>
+</head>
+<body>
+    <div class="caja">
+        <div class="icono">🤠🎉</div>
+        <h1>¡Asistencia Confirmada!</h1>
+        <p>Gracias por confirmar tu lugar en el <strong>Cotorreo de Rancho</strong>.</p>
+        <p>Nos vemos el <strong>3 de Octubre</strong> en <strong>Rancho Los Helechos</strong>, rumbo a Comala.</p>
+        <p class="frase">Buena compañía, mejores historias.</p>
+        <a href="{% url 'invitacion' %}" class="volver">Volver a la invitación</a>
+    </div>
+</body>
+</html>

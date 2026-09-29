@@ -1,0 +1,528 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PV End of Summer Bash | Casa Cuale</title>
+    <meta name="description" content="Join Rick and Jay for the PV End of Summer Bash/Potluck at Casa Cuale — September 25, 2026, 5-10 PM.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PV End of Summer Bash | Casa Cuale">
+    <meta property="og:description" content="Join Rick and Jay for an end of summer bash — great food, cocktails, and company. September 25, 2026, 5-10 PM at Casa Cuale.">
+    <meta property="og:image" content="{% static 'images/og_image-rick.jpeg'%}">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --mx-red: #ce1126;
+            --mx-green: #006341;
+            --cream: #fdf6ea;
+            --charcoal: #2b2620;
+            --gold: #e0a233;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--cream);
+            background-image:
+                radial-gradient(circle at 15% 5%, rgba(206,17,38,0.05), transparent 35%),
+                radial-gradient(circle at 85% 95%, rgba(0,99,65,0.06), transparent 40%);
+            color: var(--charcoal);
+            font-family: "Nunito", sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+
+        h1, h2, h3 {
+            font-family: "Baloo 2", sans-serif;
+            color: var(--charcoal);
+            text-align: center;
+        }
+
+        .contenedor {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .stripe {
+            height: 6px;
+            display: flex;
+        }
+        .stripe span { flex: 1; }
+        .stripe .r { background: var(--mx-red); }
+        .stripe .w { background: #fff; }
+        .stripe .g { background: var(--mx-green); }
+
+        /* ============ MODAL DE MUSICA ============ */
+        #musica-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(30, 20, 10, 0.82);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            padding: 20px;
+        }
+
+        #musica-modal .caja {
+            background: var(--cream);
+            border: 3px solid var(--mx-red);
+            border-radius: 16px;
+            padding: 35px 30px;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        #musica-modal h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        #musica-modal p {
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .botones-modal {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .btn-fiesta {
+            font-family: "Baloo 2", sans-serif;
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 12px 26px;
+            border-radius: 30px;
+            border: 2px solid var(--charcoal);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-fiesta.si {
+            background: var(--mx-red);
+            color: #fff;
+            border-color: var(--mx-red);
+        }
+
+        .btn-fiesta.no {
+            background: transparent;
+            color: var(--charcoal);
+        }
+
+        .btn-fiesta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero img {
+            width: 100%;
+            border-radius: 0 0 16px 16px;
+            box-shadow: 0 15px 40px rgba(43,38,32,0.3);
+        }
+
+        .hero-title {
+            text-align: center;
+            padding: 25px 20px 5px;
+        }
+
+        .hero-title h1 {
+            font-size: clamp(1.6rem, 5vw, 2.4rem);
+            color: var(--mx-red);
+            margin-bottom: 6px;
+        }
+
+        .hero-title p {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--mx-green);
+        }
+
+        /* ============ CONTADOR ============ */
+        .contador {
+            max-width: 500px;
+            margin: 25px auto;
+            padding: 18px 20px;
+            background: linear-gradient(135deg, var(--mx-red), #a80d1f);
+            color: #fff;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(206,17,38,0.3);
+        }
+
+        .contador .numero {
+            font-family: "Baloo 2", sans-serif;
+            font-size: 2.2rem;
+            display: block;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .contador .etiqueta {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* ============ SECCIONES ============ */
+        .seccion {
+            background: rgba(255,255,255,0.55);
+            border: 2px solid rgba(0,99,65,0.15);
+            border-radius: 16px;
+            padding: 25px 25px 30px;
+            margin: 25px 0;
+        }
+
+        .seccion h2 {
+            font-size: 1.6rem;
+            color: var(--mx-green);
+            margin-bottom: 16px;
+        }
+
+        .info-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 14px;
+            align-items: flex-start;
+        }
+
+        .info-row .icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .info-row p { margin: 0; }
+
+        .directions-box {
+            background: rgba(224,162,51,0.15);
+            border-left: 4px solid var(--gold);
+            border-radius: 8px;
+            padding: 14px 16px;
+            font-size: 0.92rem;
+            margin-top: 10px;
+        }
+
+        /* ============ POTLUCK CHART ============ */
+        .potluck-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 10px;
+        }
+
+        .potluck-card {
+            text-align: center;
+            padding: 16px 10px;
+            border-radius: 12px;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .potluck-card .letters {
+            font-family: "Baloo 2", sans-serif;
+            font-size: 1.4rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .potluck-card .dish {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .potluck-card.red { background: var(--mx-red); }
+        .potluck-card.gold { background: var(--gold); }
+        .potluck-card.green { background: var(--mx-green); }
+
+        .color-scheme-note {
+            text-align: center;
+            font-weight: 700;
+            color: var(--mx-red);
+            margin-top: 16px;
+        }
+
+        /* ============ FORMULARIO ============ */
+        .form-rsvp label {
+            display: block;
+            font-family: "Baloo 2", sans-serif;
+            font-weight: 600;
+            margin: 14px 0 6px;
+            color: var(--charcoal);
+        }
+
+        .form-rsvp input,
+        .form-rsvp textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 8px;
+            border: 2px solid rgba(0,99,65,0.2);
+            background: #fffdf8;
+            font-family: "Nunito", sans-serif;
+            font-size: 1rem;
+            color: var(--charcoal);
+        }
+
+        .form-rsvp input:focus,
+        .form-rsvp textarea:focus {
+            outline: none;
+            border-color: var(--mx-red);
+        }
+
+        .form-rsvp textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-rsvp .errores {
+            color: var(--mx-red);
+            font-size: 0.88rem;
+            margin-top: 4px;
+        }
+
+        .btn-confirmar {
+            display: block;
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            background: var(--mx-green);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-family: "Baloo 2", sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.25s ease, transform 0.2s ease;
+        }
+
+        .btn-confirmar:hover {
+            background: #004a30;
+            transform: translateY(-2px);
+        }
+
+        /* ============ MAPA ============ */
+        .mapa-wrap {
+            border-radius: 14px;
+            overflow: hidden;
+            border: 3px solid rgba(0,99,65,0.15);
+        }
+
+        .mapa-wrap iframe {
+            width: 100%;
+            height: 300px;
+            border: 0;
+            display: block;
+        }
+
+        .btn-mapa {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            padding: 14px;
+            background: var(--mx-red);
+            color: #fff;
+            border-radius: 30px;
+            font-family: "Baloo 2", sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.25s ease, transform 0.2s ease;
+        }
+
+        .btn-mapa:hover {
+            background: #a80d1f;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-family: "Baloo 2", sans-serif;
+            font-weight: 600;
+            color: var(--mx-green);
+        }
+
+        @media (max-width: 600px) {
+            body { font-size: 1.02rem; }
+            .contador .numero { font-size: 1.9rem; }
+            .seccion { padding: 18px; }
+            .potluck-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============ MODAL DE CONSENTIMIENTO DE MUSICA ============ -->
+    <div id="musica-modal">
+        <div class="caja">
+            <h2>🎉 Welcome!</h2>
+            <p>Want a little music while you check out the invite?</p>
+            <div class="botones-modal">
+                <button type="button" class="btn-fiesta si" id="btn-musica-si">Yes, play it</button>
+                <button type="button" class="btn-fiesta no" id="btn-musica-no">No thanks</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="fiesta-audio" src="{% static 'music/song2.mp3' %}" loop preload="auto"></audio>
+
+    <div class="stripe"><span class="r"></span><span class="w"></span><span class="g"></span></div>
+
+    <!-- ============ HERO ============ -->
+    <div class="hero">
+        <img src="{% static 'images/event-rick.webp' %}" alt="PV End of Summer Bash">
+    </div>
+    <div class="hero-title">
+        <h1>PV End of Summer Bash</h1>
+        <p>Hosted by Rick &amp; Jay · Potluck Edition</p>
+    </div>
+
+    <div class="contenedor">
+
+        <!-- ============ CONTADOR ============ -->
+        <div class="contador">
+            <span class="numero">{{ total_assis }}</span>
+            <span class="etiqueta">Guests confirmed so far 🎉</span>
+        </div>
+
+        <!-- ============ EVENT INFO ============ -->
+        <div class="seccion">
+            <h2>The Details</h2>
+            <p style="text-align:center; margin-bottom:16px;">
+                Come join Rick and Jay at Casa Cuale for an end of summer bash. Enjoy some great libations, food, and company.
+            </p>
+
+            <div class="info-row">
+                <span class="icon">📅</span>
+                <p><strong>When:</strong> September 25, 2026 · 5:00 – 10:00 PM</p>
+            </div>
+            <div class="info-row">
+                <span class="icon">📍</span>
+                <p><strong>Where:</strong> Casa Cuale — Cuautémoc 634, Cerro (on the Cuale river, in Gringo Gulch)</p>
+            </div>
+            <div class="info-row">
+                <span class="icon">🍹</span>
+                <p><strong>Open bar</strong> with Christian and specialty cocktails</p>
+            </div>
+            <div class="info-row">
+                <span class="icon">👯</span>
+                <p>OK to bring friends/guests — just please RSVP with the number in your party.</p>
+            </div>
+
+            <div class="directions-box">
+                <strong>Getting there:</strong> It's best to Uber or walk — parking is limited and the street is tight.
+                Walking is about 20-25 min from Los Muertos Beach. Best way: get onto Isla Cuale and head east to the
+                end, take the Iguana bridge (steps) on the left, then right for another 1.5 blocks to the house on the right.
+            </div>
+        </div>
+
+        <!-- ============ POTLUCK ============ -->
+        <div class="seccion">
+            <h2>What to Bring</h2>
+            <p style="text-align:center;">It's a potluck! Your dish is assigned by the first letter of your last name:</p>
+            <div class="potluck-grid">
+                <div class="potluck-card red">
+                    <span class="letters">A–I</span>
+                    <span class="dish">Appetizer / Entrada</span>
+                </div>
+                <div class="potluck-card gold">
+                    <span class="letters">J–R</span>
+                    <span class="dish">Main or Side Dish</span>
+                </div>
+                <div class="potluck-card green">
+                    <span class="letters">S–Z</span>
+                    <span class="dish">Dessert / Postre</span>
+                </div>
+            </div>
+            <p class="color-scheme-note">🇲🇽 Color scheme: Red / White / Green — let's be Mexican!</p>
+        </div>
+
+        <!-- ============ RSVP FORM ============ -->
+        <div class="seccion">
+            <h2>Confirm your assistence</h2>
+            <form method="post" class="form-rsvp" action="">
+                {% csrf_token %}
+
+                <label for="{{ form.nombre.id_for_label }}">Full Name</label>
+                {{ form.nombre }}
+                {% if form.nombre.errors %}<div class="errores">{{ form.nombre.errors|striptags }}</div>{% endif %}
+
+                <label for="{{ form.email.id_for_label }}">Email</label>
+                {{ form.email }}
+                {% if form.email.errors %}<div class="errores">{{ form.email.errors|striptags }}</div>{% endif %}
+
+                <label for="{{ form.telefono.id_for_label }}">Phone Number</label>
+                {{ form.telefono }}
+
+                <label for="{{ form.num_personas.id_for_label }}">Number in Your Party</label>
+                {{ form.num_personas }}
+                {% if form.num_personas.errors %}<div class="errores">{{ form.num_personas.errors|striptags }}</div>{% endif %}
+
+                <label for="{{ form.nota.id_for_label }}">Notes (dietary restrictions, etc.)</label>
+                {{ form.nota }}
+
+                <button type="submit" class="btn-confirmar">Count Me In! 🎊</button>
+            </form>
+        </div>
+
+        <!-- ============ MAPA ============ -->
+        <div class="seccion">
+            <h2>How to Get There</h2>
+            <div class="mapa-wrap">
+                <iframe src="https://www.google.com/maps?q=Cuauht%C3%A9moc+634,+Cerro,+Puerto+Vallarta&output=embed"
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin">
+                </iframe>
+            </div>
+            <a href="https://maps.app.goo.gl/Q88mAzhw1fMP6jTc9" target="_blank" rel="noopener" class="btn-mapa">
+                📍 Open in Google Maps
+            </a>
+        </div>
+
+        <footer>
+            Can't wait to see you there! 🎉
+            <p> Website invittion by <a style="color:#4EB7B4" href="https://webdevelopermx.com/">Proyecto Digital</a></p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('musica-modal');
+            const audio = document.getElementById('fiesta-audio');
+            const btnSi = document.getElementById('btn-musica-si');
+            const btnNo = document.getElementById('btn-musica-no');
+
+            function cerrarModal() {
+                modal.style.display = 'none';
+            }
+
+            btnSi.addEventListener('click', function () {
+                audio.volume = 0.6;
+                audio.play().catch(function (err) {
+                    console.warn('Could not autoplay audio:', err);
+                });
+                cerrarModal();
+            });
+
+            btnNo.addEventListener('click', cerrarModal);
+        });
+    </script>
+
+</body>
+</html>

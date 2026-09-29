@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Digital</title>
+    <style>
+    
+        #sobre {
+            background-color: #F4F4F4;
+            padding: 40px;
+            border-radius: 10px;
+            color: #333333;
+            text-align: center;
+        }
+
+        .section-title {
+            color: #2C3E50;
+            font-size: 2.5em;
+        }
+
+        .subsection-title {
+            color: #2C3E50;
+            font-size: 2em;
+        }
+
+        .section-paragraph {
+            font-size: 1.2em;
+        }
+
+        .service-list {
+            list-style-type: none;
+            padding: 0;
+            font-size:20px;
+            color:white;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .service-item {
+            background-color: #E67E22;
+            margin: 15px;
+            padding: 20px;
+            border-radius: 8px;
+            flex: 0 1 90%;
+            max-width: 600px;
+        }
+
+        .service-item-1 { background-color: #E67E22; }
+        .service-item-2 { background-color: #1ABC9C; }
+        .service-item-3 { background-color: #3498DB; }
+        .service-item-4 { background-color: #9B59B6; }
+        .service-item-5 { background-color: #F39C12; }
+
+        .button-link { text-decoration: none; }
+
+        .button {
+            background-color: #E67E22;
+            color: #FFFFFF;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .animate-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            flex: 1 1 100%;
+            max-width: 100%;
+        }
+
+        @media (min-width: 600px) {
+            .animate-item {
+                flex: 0 1 45%;
+                max-width: 400px;
+            }
+        }
+
+        .animate-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <section id="sobre" class="scroll-fade">
+        <h2 class="section-title">Acerca de Nosotros</h2>
+        <p class="section-paragraph">
+            En <strong>Proyecto Digital</strong>, somos un equipo de profesionales apasionados por el desarrollo web. Nuestra misión es crear sitios y aplicaciones que no solo reflejen los valores y principios de tu negocio, sino que también ofrezcan una experiencia digital excepcional.
+        </p>
+        
+        <h3 class="subsection-title">¿Qué hacemos?</h3>
+        <ul class="service-list">
+            <li class="animate-item service-item service-item-1">
+                <strong>Diseño Web 100% Personalizado:</strong> Nuestros diseños son únicos, evitando el uso de plantillas prediseñadas.
+            </li>
+            <li class="animate-item service-item service-item-2">
+                <strong>Adaptación a Dispositivos Móviles:</strong> Todos nuestros sitios son responsivos y se ven bien en cualquier dispositivo.
+            </li>
+            <li class="animate-item service-item service-item-3">
+                <strong>Posicionamiento Web:</strong> Implementamos estrategias efectivas para mejorar la visibilidad de tu negocio en línea.
+            </li>
+            <li class="animate-item service-item service-item-4">
+                <strong>Mantenimiento Mensual:</strong> Ofrecemos mantenimiento continuo para asegurar que tu sitio esté siempre en óptimas condiciones.
+            </li>
+            <li class="animate-item service-item service-item-5">
+                <strong>Migración de Dominios:</strong> Facilitamos la transición a nuevas plataformas sin complicaciones.
+            </li>
+        </ul>
+        
+        <h3 class="subsection-title">Nuestra Meta</h3>
+        <p class="section-paragraph">
+            Nuestra meta es empoderar a cada negocio con las herramientas digitales necesarias para crecer y prosperar en un mundo cada vez más conectado. Buscamos ser el socio tecnológico de confianza que potencie tu éxito.
+        </p>
+        
+        <h3 class="subsection-title">Nuestro Enfoque</h3>
+        <p class="section-paragraph">
+            Comenzamos cada proyecto con una reunión inicial para comprender tus objetivos y expectativas. Nuestro equipo de diseño y desarrollo trabaja de la mano contigo para asegurar que cada aspecto del proyecto esté alineado con tu visión.
+        </p>
+        
+        <p class="section-paragraph">
+            En <strong>Proyecto Digital</strong>, no solo construimos sitios web, creamos soluciones que impulsan tu negocio hacia el éxito en el mundo digital.
+        </p>
+        
+        <h3 class="subsection-title">Contáctanos</h3>
+        <p class="section-paragraph">
+            Si deseas más información sobre nuestros servicios o tienes alguna pregunta, no dudes en ponerte en contacto. Estamos aquí para ayudarte a dar el siguiente paso en tu viaje digital.
+        </p>
+        
+        <a href="{% url 'inicio' %}" class="button-link">
+            <button class="button">Regresar al Inicio</button>
+        </a>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const items = document.querySelectorAll('.animate-item');
+            const observerOptions = {
+                root: null,
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            items.forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>

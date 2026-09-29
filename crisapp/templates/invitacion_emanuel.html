@@ -1,0 +1,484 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotorreo de Rancho | Midori y Emmanuel</title>
+    <meta name="description" content="Invitación al Cotorreo de Rancho de Midori y Emmanuel — 3 de Octubre, Rancho Los Helechos, rumbo a Comala.">
+
+    <!-- Open Graph (como se ve el link al compartirlo en WhatsApp, Facebook, etc.) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Cotorreo de Rancho | Midori y Emmanuel">
+    <meta property="og:description" content="¡Ayúdanos a celebrar dos ocasiones únicas! 3 de Octubre en Rancho Los Helechos, rumbo a Comala. Confirma tu asistencia aquí.">
+    <meta property="og:image" content="{{ imagen_absoluta }}">
+    <meta property="og:locale" content="es_MX">
+
+    <!-- Twitter Card (algunas apps usan esto en vez de Open Graph) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cotorreo de Rancho | Midori y Emmanuel">
+    <meta name="twitter:description" content="¡Ayúdanos a celebrar dos ocasiones únicas! 3 de Octubre en Rancho Los Helechos, rumbo a Comala.">
+    <meta name="twitter:image" content="{{ imagen_absoluta }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rye&family=Bebas+Neue&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --cream: #f1e6c9;
+            --cream-2: #e6d6ac;
+            --brown-dark: #2b1810;
+            --brown: #4a2f1f;
+            --rust: #b1462b;
+            --rust-dark: #8a341f;
+            --gold: #c9a24b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--cream);
+            background-image:
+                radial-gradient(circle at 20% 10%, rgba(177,70,43,0.06), transparent 40%),
+                radial-gradient(circle at 80% 90%, rgba(43,24,16,0.08), transparent 45%);
+            color: var(--brown-dark);
+            font-family: "Cormorant Garamond", serif;
+            font-size: 1.15rem;
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+
+        h1, h2, h3 {
+            font-family: "Rye", serif;
+            color: var(--brown-dark);
+            text-align: center;
+        }
+
+        .contenedor {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ============ MODAL DE MUSICA ============ */
+        #musica-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 12, 8, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            padding: 20px;
+        }
+
+        #musica-modal .caja {
+            background: var(--cream);
+            border: 3px solid var(--rust);
+            border-radius: 16px;
+            padding: 35px 30px;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        #musica-modal h2 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+
+        #musica-modal p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .botones-modal {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .btn-western {
+            font-family: "Bebas Neue", sans-serif;
+            letter-spacing: 1.5px;
+            font-size: 1.1rem;
+            padding: 12px 26px;
+            border-radius: 8px;
+            border: 2px solid var(--brown-dark);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-western.si {
+            background: var(--rust);
+            color: var(--cream);
+        }
+
+        .btn-western.no {
+            background: transparent;
+            color: var(--brown-dark);
+        }
+
+        .btn-western:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+        }
+
+        /* ============ HERO / IMAGEN POSTER ============ */
+        .hero {
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .hero img {
+            width: 100%;
+            border-radius: 12px;
+            border: 6px solid var(--cream-2);
+            box-shadow: 0 15px 40px rgba(43,24,16,0.35);
+        }
+
+        /* ============ CONTADOR DE ASISTENTES ============ */
+        .contador {
+            max-width: 500px;
+            margin: 0 auto 30px;
+            padding: 18px 20px;
+            background: linear-gradient(135deg, var(--rust), var(--rust-dark));
+            color: var(--cream);
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(138,52,31,0.3);
+        }
+
+        .contador .numero {
+            font-family: "Rye", serif;
+            font-size: 2.4rem;
+            display: block;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .contador .etiqueta {
+            font-family: "Bebas Neue", sans-serif;
+            letter-spacing: 1.5px;
+            font-size: 1rem;
+        }
+
+        /* ============ SECCIONES GENERALES ============ */
+        .seccion {
+            background: rgba(255,255,255,0.35);
+            border: 2px solid var(--cream-2);
+            border-radius: 16px;
+            padding: 25px 25px 30px;
+            margin: 25px 0;
+        }
+
+        .seccion h2 {
+            font-size: 1.8rem;
+            border-bottom: 3px solid var(--rust);
+            display: inline-block;
+            padding-bottom: 6px;
+            margin: 0 auto 20px;
+        }
+
+        .seccion-titulo-wrap {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .frase-destacada {
+            text-align: center;
+            font-style: italic;
+            color: var(--rust-dark);
+            font-weight: 600;
+            margin: 10px 0 20px;
+        }
+
+        /* ============ ITINERARIO ============ */
+        .itinerario {
+            list-style: none;
+        }
+
+        .itinerario li {
+            display: flex;
+            gap: 15px;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--cream-2);
+            align-items: baseline;
+        }
+
+        .itinerario li:last-child {
+            border-bottom: none;
+        }
+
+        .itinerario .hora {
+            font-family: "Bebas Neue", sans-serif;
+            color: var(--rust-dark);
+            min-width: 100px;
+            font-size: 1.15rem;
+            letter-spacing: 1px;
+        }
+
+        /* ============ FORMULARIO RSVP ============ */
+        .form-rsvp label {
+            display: block;
+            font-family: "Bebas Neue", sans-serif;
+            letter-spacing: 1px;
+            margin: 14px 0 6px;
+            color: var(--brown);
+        }
+
+        .form-rsvp input,
+        .form-rsvp textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 8px;
+            border: 2px solid var(--cream-2);
+            background: #fffaf0;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 1.05rem;
+            color: var(--brown-dark);
+        }
+
+        .form-rsvp input:focus,
+        .form-rsvp textarea:focus {
+            outline: none;
+            border-color: var(--rust);
+        }
+
+        .form-rsvp textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-rsvp .errores {
+            color: var(--rust-dark);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .btn-confirmar {
+            display: block;
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            background: var(--rust);
+            color: var(--cream);
+            border: none;
+            border-radius: 10px;
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: background 0.25s ease, transform 0.2s ease;
+        }
+
+        .btn-confirmar:hover {
+            background: var(--rust-dark);
+            transform: translateY(-2px);
+        }
+
+        /* ============ MAPA ============ */
+        .mapa-wrap {
+            border-radius: 14px;
+            overflow: hidden;
+            border: 3px solid var(--cream-2);
+        }
+
+        .mapa-wrap iframe {
+            width: 100%;
+            height: 320px;
+            border: 0;
+            display: block;
+        }
+
+        .btn-mapa {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            padding: 14px;
+            background: var(--rust);
+            color: var(--cream);
+            border-radius: 10px;
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 1.15rem;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            transition: background 0.25s ease, transform 0.2s ease;
+        }
+
+        .btn-mapa:hover {
+            background: var(--rust-dark);
+            transform: translateY(-2px);
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-family: "Bebas Neue", sans-serif;
+            letter-spacing: 1.5px;
+            color: var(--brown);
+        }
+
+        @media (max-width: 600px) {
+            body { font-size: 1.05rem; }
+            .contador .numero { font-size: 2rem; }
+            .seccion { padding: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============ MODAL DE CONSENTIMIENTO DE MUSICA ============ -->
+    <div id="musica-modal">
+        <div class="caja">
+            <h2>🤠 ¡Bienvenido al Cotorreo!</h2>
+            <p>¿Nos acompañas con un poco de música mientras revisas la invitación?</p>
+            <div class="botones-modal">
+                <button type="button" class="btn-western si" id="btn-musica-si">Sí, reproducir</button>
+                <button type="button" class="btn-western no" id="btn-musica-no">No, gracias</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <audio id="fiesta-audio" src="{% static 'music/song.mp3' %}" loop preload="auto"></audio>
+
+    <!-- ============ IMAGEN DE LA INVITACIÓN ============ -->
+    <div class="hero">
+        <img src="{% static 'images/imagen.webp' %}" alt="Invitación Cotorreo de Rancho - Midori y Emmanuel">
+    </div>
+
+    <div class="contenedor">
+
+        <!-- ============ CONTADOR DE ASISTENTES ============ -->
+        <div class="contador">
+          
+              <span class="numero">{{ total_asistentes }}</span>
+
+            
+            <span class="etiqueta">Personas ya confirmaron su asistencia 🎉</span>
+        </div>
+
+        <!-- ============ INFO DEL EVENTO ============ -->
+        <div class="seccion">
+            <div class="seccion-titulo-wrap">
+                <h2>Cotorreo de Rancho</h2>
+            </div>
+            <p style="text-align:center;">
+                Los Hermanos <strong>Midori y Emmanuel</strong> te invitan a celebrar dos ocasiones únicas:
+                la llegada de Midori a Colima y el cumpleaños de Emmanuel Rivera.
+            </p>
+            <p class="frase-destacada">Por siempre hermanos</p>
+            <p style="text-align:center;">
+                <strong>📅 3 de Octubre</strong><br>
+                <strong>📍 Rancho Los Helechos</strong> — rumbo a Comala
+            </p>
+        </div>
+
+        <!-- ============ ITINERARIO ============ -->
+        <div class="seccion">
+            <div class="seccion-titulo-wrap">
+                <h2>Itinerario</h2>
+            </div>
+            <ul class="itinerario">
+                <li><span class="hora">8:00 PM</span><span>Recibimiento y asignación de mesas</span></li>
+                <li><span class="hora">9:30 PM</span><span>Cena</span></li>
+                <li><span class="hora">10:30 PM</span><span>Baile</span></li>
+                <li><span class="hora">11:30 PM</span><span>Brindis</span></li>
+                <li><span class="hora">2:00 AM</span><span>Hora final del evento (con posibles horas extras)</span></li>
+            </ul>
+        </div>
+
+        <!-- ============ INFO EXTRA ============ -->
+        <div class="seccion" style="text-align:center;">
+            <h2 style="font-size:1.4rem;">¡Habrá!</h2>
+            <p><strong>Cerveza gratis y birria para la cena</strong></p>
+            <p>Trae tus bebidas de preferencia.</p>
+        </div>
+
+        <!-- ============ FORMULARIO RSVP ============ -->
+        <div class="seccion">
+            <div class="seccion-titulo-wrap">
+                <h2>Confirmación de asistencia agotado</h2>
+            </div>
+            <form method="post" class="form-rsvp" action="">
+                {% csrf_token %}
+
+                <label for="{{ form.nombre.id_for_label }}">Nombre completo</label>
+                {{ form.nombre }}
+                {% if form.nombre.errors %}<div class="errores">{{ form.nombre.errors|striptags }}</div>{% endif %}
+
+                <label for="{{ form.telefono.id_for_label }}">Número de teléfono</label>
+                {{ form.telefono }}
+                {% if form.telefono.errors %}<div class="errores">{{ form.telefono.errors|striptags }}</div>{% endif %}
+
+                <label for="{{ form.num_personas.id_for_label }}">Número de personas (incluyéndote)</label>
+                {{ form.num_personas }}
+                {% if form.num_personas.errors %}<div class="errores">{{ form.num_personas.errors|striptags }}</div>{% endif %}
+
+                <label for="{{ form.nota.id_for_label }}">Nota especial (opcional)</label>
+                {{ form.nota }}
+
+                <button type="submit" class="btn-confirmar">Confirmar Asistencia</button>
+            </form>
+        </div>
+
+        <!-- ============ MAPA ============ -->
+        <div class="seccion">
+            <div class="seccion-titulo-wrap">
+                <h2 style="font-size:1.4rem;">Cómo Llegar</h2>
+            </div>
+            <div class="mapa-wrap">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3765.4054537234324!2d-103.75989152478877!3d19.308204681944826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTnCsDE4JzI5LjUiTiAxMDPCsDQ1JzI2LjMiVw!5e0!3m2!1sen!2smx!4v1787349268638!5m2!1sen!2smx"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin">
+                </iframe>
+            </div>
+            <a href="https://www.google.com/maps?q=19.308204650878906,-103.75731658935547&z=17&hl=en"
+               target="_blank" rel="noopener" class="btn-mapa">
+                📍 Abrir ubicación en Google Maps
+            </a>
+        </div>
+
+        <footer>
+            Buena compañía, mejores historias
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('musica-modal');
+            const audio = document.getElementById('fiesta-audio');
+            const btnSi = document.getElementById('btn-musica-si');
+            const btnNo = document.getElementById('btn-musica-no');
+
+            function cerrarModal() {
+                modal.style.display = 'none';
+            }
+
+            btnSi.addEventListener('click', function () {
+                // El clic del usuario cuenta como interacción, así que el navegador
+                // permite reproducir audio con sonido a partir de aquí.
+                audio.volume = 0.6;
+                audio.play().catch(function (err) {
+                    console.warn('No se pudo reproducir el audio automáticamente:', err);
+                });
+                cerrarModal();
+            });
+
+            btnNo.addEventListener('click', cerrarModal);
+        });
+    </script>
+
+</body>
+</html>

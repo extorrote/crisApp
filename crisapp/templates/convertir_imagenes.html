@@ -1,0 +1,1958 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convertir Imágenes Gratis | JPG PNG WebP GIF ICO PDF | Proyecto Digital</title>
+  <meta name="description" content="Convierte imágenes entre cualquier formato: JPG, PNG, WebP, GIF, BMP, TIFF, ICO, PDF. Gratis, sin límites, sin registro. Proyecto Digital Puerto Vallarta.">
+  <meta property="og:title" content="Convertidor de Imágenes Gratis | Proyecto Digital">
+  <meta property="og:description" content="Convierte entre JPG, PNG, WebP, GIF, BMP, TIFF, ICO y PDF gratis y sin límites.">
+  <meta property="og:image" content="/static/images/proyecto_digital2.webp">
+  <link rel="icon" href="{% static '/images/logo_proyecto_digital.ico' %}" type="image/x-icon">
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .grecaptcha-badge { visibility: hidden !important; }
+
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: #f0f2f5;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    /* ══ HEADER ════════════════════════════════════════════════ */
+    header {
+      background: #1a1a2e;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 100%;
+      display: flex;
+      margin: auto;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo img { width: 200px; }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: rgba(255,255,255,.75);
+      text-decoration: none;
+      font-size: .88rem;
+      transition: color .2s;
+    }
+
+    nav a:hover { color: #25d366; }
+
+    /* ══ HERO ══════════════════════════════════════════════════ */
+    .hero {
+      background: #1a1a2e;
+      color: #fff;
+      text-align: center;
+      padding: 62px 20px 80px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #25d366;
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+      letter-spacing: .5px;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      opacity: .85;
+      max-width: 540px;
+      margin: 0 auto 22px;
+      line-height: 1.65;
+    }
+
+    .fmt-tags {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .fmt-tag {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 4px 11px;
+      border-radius: 6px;
+      letter-spacing: .4px;
+    }
+
+    /* ══ MAIN CONTENT ══════════════════════════════════════════ */
+    main {
+      max-width: 740px;
+      margin: auto;
+      margin-top: 30px;
+      padding: 0 16px;
+    }
+
+    /* ══ CARD ══════════════════════════════════════════════════ */
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.12);
+      overflow: hidden;
+    }
+
+    /* ══ FORMAT SELECTOR BAR ═══════════════════════════════════ */
+    .format-bar {
+      background: #f8f9fb;
+      border-bottom: 1px solid #e8eaed;
+      padding: 24px 28px 20px;
+    }
+
+    .format-bar-title {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      color: #888;
+      margin-bottom: 14px;
+    }
+
+    .format-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .format-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+      min-width: 150px;
+    }
+
+    .format-group label {
+      font-size: .78rem;
+      font-weight: 700;
+      color: #555;
+    }
+
+    .fmt-select-wrap { position: relative; }
+
+    .fmt-select-wrap i {
+      position: absolute;
+      right: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #aaa;
+      pointer-events: none;
+      font-size: .78rem;
+    }
+
+    select.fmt-select {
+      width: 100%;
+      padding: 10px 34px 10px 13px;
+      border-radius: 10px;
+      border: 1.5px solid #d0d3d9;
+      background: #fff;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-size: .95rem;
+      font-weight: 700;
+      color: #222;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    select.fmt-select:focus {
+      outline: none;
+      border-color: #25d366;
+      box-shadow: 0 0 0 3px rgba(37,211,102,.15);
+    }
+
+    .arrow-sep {
+      font-size: 1.3rem;
+      color: #25d366;
+      padding-bottom: 10px;
+      flex-shrink: 0;
+    }
+
+    /* ══ DROP ZONE ════════════════════════════════════════════ */
+    .drop-area { padding: 28px 28px 20px; }
+
+    .drop-zone {
+      border: 2.5px dashed #d0d3d9;
+      border-radius: 14px;
+      padding: 46px 24px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      background: #fafbfc;
+      transition: border-color .25s, background .25s;
+    }
+
+    .drop-zone:hover,
+    .drop-zone.dragover {
+      border-color: #25d366;
+      background: #f0fdf4;
+    }
+
+    .drop-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .drop-icon {
+      width: 62px;
+      height: 62px;
+      background: #eefbf4;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 1.5rem;
+      color: #25d366;
+    }
+
+    .drop-zone h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #222;
+    }
+
+    .drop-zone p { font-size: .875rem; color: #777; }
+
+    .drop-hint {
+      display: inline-block;
+      margin-top: 12px;
+      background: #f0f2f5;
+      border: 1px solid #e0e2e7;
+      border-radius: 8px;
+      padding: 5px 14px;
+      font-size: .78rem;
+      color: #666;
+    }
+
+    /* ══ PREVIEW ══════════════════════════════════════════════ */
+    #preview-wrap {
+      padding: 0 28px 6px;
+      display: none;
+    }
+
+    #preview-wrap.visible { display: block; }
+
+    .preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .preview-header span {
+      font-size: .82rem;
+      color: #666;
+      font-weight: 600;
+    }
+
+    .btn-clear {
+      background: none;
+      border: 1px solid #e0e2e7;
+      color: #dc3545;
+      font-size: .78rem;
+      padding: 4px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Roboto', Arial, sans-serif;
+      transition: background .2s;
+    }
+
+    .btn-clear:hover { background: #fff0f2; border-color: #dc3545; }
+
+    #preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 10px;
+    }
+
+    .prev-item {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      background: #f0f2f5;
+      border: 1.5px solid #e8eaed;
+    }
+
+    .prev-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .prev-remove {
+      position: absolute;
+      top: 4px; right: 4px;
+      background: rgba(220,53,69,.85);
+      border: none;
+      color: #fff;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      font-size: .65rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+
+    .prev-item:hover .prev-remove { opacity: 1; }
+
+    .prev-name {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(0,0,0,.55);
+      color: #fff;
+      font-size: .6rem;
+      padding: 3px 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ══ ACTION BAR ════════════════════════════════════════════ */
+    .action-bar {
+      padding: 18px 28px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    #file-count-label {
+      flex: 1;
+      font-size: .875rem;
+      color: #777;
+    }
+
+    .btn-convert {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: #25d366;
+      color: #fff;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-weight: 700;
+      font-size: .95rem;
+      padding: 12px 26px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background .25s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 14px rgba(37,211,102,.3);
+      white-space: nowrap;
+    }
+
+    .btn-convert:hover:not(:disabled) {
+      background: #1ebe57;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(37,211,102,.4);
+    }
+
+    .btn-convert:active:not(:disabled) { transform: translateY(0); }
+
+    .btn-convert:disabled {
+      background: #c8cdd4;
+      color: #fff;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    /* ══ LOADING OVERLAY ═══════════════════════════════════════ */
+    #loading {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(26,26,46,.7);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    #loading.active { display: flex; }
+
+    .spinner {
+      width: 54px; height: 54px;
+      border: 5px solid rgba(255,255,255,.2);
+      border-top-color: #25d366;
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #loading p     { color: #fff; font-size: 1rem; font-weight: 700; }
+    #loading small { color: rgba(255,255,255,.6); font-size: .82rem; }
+
+    /* ══ INFO CARDS ════════════════════════════════════════════ */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .info-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 22px 18px;
+      text-align: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,.07);
+      transition: box-shadow .2s, transform .2s;
+    }
+
+    .info-card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,.12);
+      transform: translateY(-2px);
+    }
+
+    .info-card .ic { font-size: 1.8rem; margin-bottom: 10px; }
+    .info-card h3  { font-size: .92rem; font-weight: 700; margin-bottom: 6px; color: #222; }
+    .info-card p   { font-size: .8rem; color: #777; line-height: 1.55; }
+
+    /* ══ FORMAT TABLE — FULLY RESPONSIVE ══════════════════════ */
+    .section-wrap {
+      margin-top: 44px;
+      width: 100%;
+    }
+
+    .section-wrap h2 {
+      font-size: clamp(1rem, 4vw, 1.25rem);
+      font-weight: 700;
+      margin-bottom: 18px;
+      color: #222;
+    }
+
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.07);
+      background:
+        linear-gradient(to right, #fff 20%, rgba(255,255,255,0)),
+        linear-gradient(to left,  #fff 20%, rgba(255,255,255,0)) 100% 0,
+        linear-gradient(to right, rgba(0,0,0,.06), rgba(0,0,0,0)) 0 0,
+        linear-gradient(to left,  rgba(0,0,0,.06), rgba(0,0,0,0)) 100% 0;
+      background-repeat: no-repeat;
+      background-color: #fff;
+      background-size: 40px 100%, 40px 100%, 12px 100%, 12px 100%;
+      background-attachment: local, local, scroll, scroll;
+    }
+
+    .fmt-table {
+      width: 100%;
+      min-width: 420px;
+      border-collapse: collapse;
+      background: #fff;
+      font-size: .85rem;
+    }
+
+    .fmt-table th {
+      background: #f8f9fb;
+      border-bottom: 1px solid #e8eaed;
+      padding: 11px 14px;
+      text-align: left;
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: #888;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .fmt-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #f0f2f5;
+      color: #333;
+      vertical-align: middle;
+    }
+
+    .fmt-table tr:last-child td { border-bottom: none; }
+    .fmt-table tr:hover td      { background: #fafbfc; }
+    .fmt-table td:first-child   { white-space: nowrap; }
+
+    .fmt-table td:nth-child(2) {
+      min-width: 130px;
+      word-break: break-word;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 5px;
+      font-size: .7rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .tag-web  { background: #e6faf0; color: #1a9e52; }
+    .tag-loss { background: #eef0ff; color: #4a56d4; }
+    .tag-doc  { background: #fff8e1; color: #b07d00; }
+    .tag-icon { background: #fff0f2; color: #c0392b; }
+
+    .scroll-hint {
+      display: none;
+      text-align: right;
+      font-size: .7rem;
+      color: #aaa;
+      margin-bottom: 6px;
+    }
+
+    /* ══ OTHER TOOLS ═══════════════════════════════════════════ */
+    .tools-wrap { margin-top: 44px; text-align: center; }
+
+    .tools-wrap h2 {
+      font-size: clamp(1rem, 4vw, 1.25rem);
+      font-weight: 700;
+      margin-bottom: 18px;
+      color: #222;
+    }
+
+    .tools-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tool-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #1a1a2e;
+      color: #fff;
+      padding: 11px 22px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: .88rem;
+      font-weight: 700;
+      transition: background .2s, transform .15s;
+    }
+
+    .tool-btn:hover { background: #0f3460; transform: translateY(-1px); }
+
+    /* ══ CONTACT FORM ══════════════════════════════════════════ */
+    #contacto {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 55%, #0f3460 100%);
+      max-width: 680px;
+      margin: 60px auto 0;
+      padding: 40px 36px;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.18);
+    }
+
+    #contacto p {
+      color: rgba(255,255,255,.75);
+      font-size: .95rem;
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    #contacto div { margin-bottom: 16px; }
+
+    #contacto label {
+      display: block;
+      color: rgba(255,255,255,.8);
+      font-size: .82rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    #contacto input,
+    #contacto textarea,
+    #contacto select {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-size: .95rem;
+      transition: border-color .2s, background .2s;
+    }
+
+    #contacto input:focus,
+    #contacto textarea:focus {
+      outline: none;
+      border-color: #25d366;
+      background: rgba(255,255,255,.12);
+    }
+
+    #contacto input::placeholder,
+    #contacto textarea::placeholder { color: rgba(255,255,255,.35); }
+
+    #contacto textarea { min-height: 110px; resize: vertical; }
+
+    #contacto button[type="submit"] {
+      width: 100%;
+      margin-top: 8px;
+      padding: 13px;
+      background: #25d366;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background .25s, transform .15s;
+      box-shadow: 0 4px 14px rgba(37,211,102,.3);
+    }
+
+    #contacto button[type="submit"]:hover {
+      background: #1ebe57;
+      transform: translateY(-1px);
+    }
+
+    /* ══ FOOTER ════════════════════════════════════════════════ */
+    #footer {
+      background: #1a1a2e;
+      color: rgba(255,255,255,.6);
+      text-align: center;
+      padding: 40px 20px 30px;
+      margin-top: 20px;
+      font-size: .85rem;
+      line-height: 1.8;
+    }
+
+    #footer-copy { margin-bottom: 8px; }
+
+    #footer-contact a,
+    #footer-links a,
+    #footer-quick-links a {
+      color: rgba(255,255,255,.75);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    #footer-contact a:hover,
+    #footer-links a:hover,
+    #footer-quick-links a:hover { color: #25d366; }
+
+    #social-links {
+      margin: 14px 0 6px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    #social-links a {
+      color: rgba(255,255,255,.7);
+      text-decoration: none;
+      font-size: .85rem;
+      transition: color .2s;
+    }
+
+    #social-links a:hover { color: #25d366; }
+
+    #social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin: 10px 0 14px;
+      font-size: 1.3rem;
+    }
+
+    #social-icons a {
+      color: rgba(255,255,255,.65);
+      transition: color .2s;
+    }
+
+    #social-icons a:hover { color: #25d366; }
+
+    #footer-links, #footer-quick-links { margin: 6px 0; font-size: .82rem; }
+
+    #newsletter-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      max-width: 360px;
+      margin: 20px auto 0;
+      background: none;
+      box-shadow: none;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    #newsletter-email-label {
+      color: rgba(255,255,255,.7);
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    #newsletter-email {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.07);
+      color: #fff;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-size: .9rem;
+      transition: border-color .2s;
+    }
+
+    #newsletter-email:focus { outline: none; border-color: #25d366; }
+    #newsletter-email::placeholder { color: rgba(255,255,255,.35); }
+
+    #newsletter-button {
+      width: 100%;
+      padding: 10px;
+      background: #25d366;
+      color: #fff;
+      font-weight: 700;
+      font-size: .9rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    #newsletter-button:hover { background: #1ebe57; }
+
+    /* ══ RESPONSIVE ════════════════════════════════════════════ */
+    @media (max-width: 580px) {
+      header { padding: 14px 16px; }
+      .hero  { padding: 46px 16px 66px; }
+      .format-bar,
+      .drop-area,
+      .action-bar,
+      #preview-wrap { padding-left: 16px; padding-right: 16px; }
+      .arrow-sep { display: none; }
+      #preview-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
+      .section-wrap { padding: 0; }
+      .scroll-hint  { display: block; }
+      .fmt-table td:nth-child(2) { font-size: .78rem; min-width: 110px; }
+      #contacto { padding: 28px 18px; margin-left: 16px; margin-right: 16px; }
+    }
+
+    /* ══ TAB NAVIGATION ═══════════════════════════════════════ */
+    .tabs {
+      display: flex;
+      gap: 0;
+      background: #15173D;
+      border-top: 8px solid #4c5c2d54;
+      border-radius: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .tabs::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      flex: 1;
+      min-width: 120px;
+      padding: 14px 10px;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      color: rgba(255,255,255,.55);
+      font-family: 'Roboto', Arial, sans-serif;
+      font-size: .82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: color .2s, border-color .2s, background .2s;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover { color: #fff; background: rgba(255,255,255,.05); }
+
+    .tab-btn.active {
+      color: #25d366;
+      border-bottom-color: #25d366;
+      background: rgba(37,211,102,.06);
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ══ VIDEO TO GIF ══════════════════════════════════════════ */
+    .gif-options {
+      padding: 20px 28px 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 14px;
+    }
+
+    .opt-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .opt-group label {
+      font-size: .75rem;
+      font-weight: 700;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    .opt-group input[type="range"] {
+      width: 100%;
+      accent-color: #25d366;
+      cursor: pointer;
+    }
+
+    .opt-group input[type="number"],
+    .opt-group select {
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1.5px solid #d0d3d9;
+      font-size: .88rem;
+      font-family: 'Roboto', Arial, sans-serif;
+      color: #333;
+      background: #fff;
+      width: 100%;
+    }
+
+    .opt-val {
+      font-size: .72rem;
+      color: #25d366;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    /* ══ REMOVE BG ═════════════════════════════════════════════ */
+    .rmbg-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 20px 28px 24px;
+    }
+
+    @media (max-width: 540px) { .rmbg-layout { grid-template-columns: 1fr; } }
+
+    .rmbg-preview-box {
+      background: repeating-conic-gradient(#e0e0e0 0% 25%, #fff 0% 50%) 0 0 / 16px 16px;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid #e8eaed;
+      position: relative;
+    }
+
+    .rmbg-preview-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .rmbg-preview-box .preview-placeholder {
+      color: #bbb;
+      font-size: .82rem;
+      text-align: center;
+      padding: 12px;
+    }
+
+    /* Background selector */
+    .bg-selector {
+      padding: 0 28px 20px;
+    }
+
+    .bg-selector h3 {
+      font-size: .78rem;
+      font-weight: 700;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 10px;
+    }
+
+    .bg-grid {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .bg-swatch {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 2.5px solid transparent;
+      cursor: pointer;
+      transition: border-color .2s, transform .15s;
+      flex-shrink: 0;
+    }
+
+    .bg-swatch:hover { transform: scale(1.1); }
+    .bg-swatch.selected { border-color: #25d366; }
+
+    .bg-swatch.transparent-swatch {
+      background: repeating-conic-gradient(#d0d0d0 0% 25%, #fff 0% 50%) 0 0 / 10px 10px;
+    }
+
+    .bg-custom-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bg-custom-wrap input[type="color"] {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 2px solid #d0d3d9;
+      padding: 2px;
+      cursor: pointer;
+      background: none;
+    }
+
+    .bg-custom-label {
+      font-size: .72rem;
+      color: #888;
+    }
+
+    /* Upload bg image */
+    .bg-upload-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f0f2f5;
+      border: 1.5px dashed #c8cdd4;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: .75rem;
+      color: #666;
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+
+    .bg-upload-label:hover { border-color: #25d366; color: #25d366; }
+
+    /* Result download area */
+    .rmbg-result {
+      display: none;
+      padding: 0 28px 24px;
+      text-align: center;
+    }
+
+    .rmbg-result.visible { display: block; }
+
+    .rmbg-result canvas {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.1);
+      margin-bottom: 14px;
+    }
+
+    /* ══ PROGRESS BAR ══════════════════════════════════════════ */
+    .progress-wrap {
+      display: none;
+      padding: 0 28px 16px;
+    }
+    .progress-wrap.visible { display: block; }
+    .progress-bar-track {
+      background: #e8eaed;
+      border-radius: 8px;
+      height: 8px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #25d366, #1ebe57);
+      border-radius: 8px;
+      width: 0%;
+      transition: width .3s ease;
+    }
+    .progress-label {
+      font-size: .78rem;
+      color: #888;
+      margin-top: 6px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ HEADER ═════════════════════════════════════════════════ -->
+  <header>
+    <a href="{% url 'inicio' %}" class="logo">
+      <img class="logo" src="/static/images/logo_negro.webp" loading="lazy" title="Logo Proyecto Digital" alt="Proyecto Digital Puerto Vallarta">
+    </a>
+    <nav>
+      <a href="{% url 'inicio' %}">Inicio</a>
+      <a href="{% url 'generar_qr' %}">Generar QR</a>
+      <a href="{% url 'about_us' %}">About Us</a>
+      <a href="{% url 'inicio' %}#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- ══ HERO ═══════════════════════════════════════════════════ -->
+  <div class="hero">
+    <span class="badge">✅ 100% Gratis · Sin registro · Sin límites</span>
+    <h1>Convertidor de Imágenes</h1>
+    <p>Convierte entre los formatos más populares al instante. Selecciona el formato destino, sube tus imágenes y descarga.</p>
+    <div class="fmt-tags">
+      <span class="fmt-tag">JPG</span>
+      <span class="fmt-tag">PNG</span>
+      <span class="fmt-tag">WEBP</span>
+      <span class="fmt-tag">GIF</span>
+      <span class="fmt-tag">BMP</span>
+      <span class="fmt-tag">TIFF</span>
+      <span class="fmt-tag">ICO</span>
+      <span class="fmt-tag">PDF</span>
+    </div>
+  </div>
+
+  <!-- ══ TOOL TABS ════════════════════════════════════════════ -->
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" data-tab="convert" role="tab">
+      <i class="fas fa-exchange-alt"></i> Convertir Imágenes
+    </button>
+    <button class="tab-btn" data-tab="videogif" role="tab">
+      <i class="fas fa-film"></i> Video a GIF
+    </button>
+    <button class="tab-btn" data-tab="rembg" role="tab">
+      <i class="fas fa-magic"></i> Quitar Fondo
+    </button>
+  </div>
+
+  <!-- ══ PANELS ═══════════════════════════════════════════════════ -->
+  <div id="tab-convert" class="tab-panel active">
+  <main>
+
+    <div class="card">
+
+      <div class="format-bar">
+        <p class="format-bar-title"><i class="fas fa-exchange-alt"></i> &nbsp;Selecciona la conversión</p>
+        <div class="format-row">
+
+          <div class="format-group">
+            <label for="fmt-from">Formato de origen</label>
+            <div class="fmt-select-wrap">
+              <select id="fmt-from" class="fmt-select">
+                <option value="">Cualquiera</option>
+                <option value="jpg">JPG / JPEG</option>
+                <option value="png">PNG</option>
+                <option value="webp">WebP</option>
+                <option value="gif">GIF</option>
+                <option value="bmp">BMP</option>
+                <option value="tiff">TIFF</option>
+                <option value="ico">ICO</option>
+              </select>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+
+          <div class="arrow-sep">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+
+          <div class="format-group">
+            <label for="fmt-to">Convertir a</label>
+            <div class="fmt-select-wrap">
+              <select id="fmt-to" class="fmt-select">
+                <option value="webp">WebP</option>
+                <option value="jpg">JPG</option>
+                <option value="png">PNG</option>
+                <option value="gif">GIF</option>
+                <option value="bmp">BMP</option>
+                <option value="tiff">TIFF</option>
+                <option value="ico">ICO</option>
+                <option value="pdf">PDF</option>
+              </select>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- FIX: action apunta explícitamente a la URL correcta -->
+      <form method="POST" enctype="multipart/form-data" id="conv-form" action="{% url 'convertir_imagenes' %}">
+        {% csrf_token %}
+        <input type="hidden" name="formato_destino" id="formato_destino" value="webp">
+
+        <div class="drop-area">
+          <div class="drop-zone" id="drop-zone">
+            <input type="file" name="imagenes" id="file-input" multiple accept="image/*,.ico">
+            <div class="drop-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+            <h2>Arrastra tus imágenes aquí MAX 10 para que no falle el sistema</h2>
+            <p>o haz clic para seleccionarlas</p>
+            <span class="drop-hint" id="drop-hint">Acepta: JPG, PNG, WebP, GIF, BMP, TIFF, ICO…</span>
+          </div>
+        </div>
+
+        <div id="preview-wrap">
+          <div class="preview-header">
+            <span id="preview-count">0 archivos</span>
+            <button type="button" class="btn-clear" id="btn-clear">
+              <i class="fas fa-trash-alt"></i> Limpiar todo
+            </button>
+          </div>
+          <div id="preview-grid"></div>
+        </div>
+
+        <div class="action-bar">
+          <span id="file-count-label">Sin archivos seleccionados</span>
+          <button type="submit" class="btn-convert" id="btn-submit" disabled>
+            <i class="fas fa-sync-alt"></i>
+            <span id="btn-label">Convertir a WebP</span>
+          </button>
+        </div>
+
+      </form>
+    </div><!-- /card -->
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="ic">♾️</div>
+        <h3>Sin límites</h3>
+        <p>Sube todas las imágenes que necesites. Múltiples archivos se empaquetan en un ZIP.</p>
+      </div>
+      <div class="info-card">
+        <div class="ic">🔒</div>
+        <h3>100% Privado</h3>
+        <p>Las imágenes se procesan en el servidor y no se almacenan ni comparten.</p>
+      </div>
+      <div class="info-card">
+        <div class="ic">⚡</div>
+        <h3>Instantáneo</h3>
+        <p>Conversión en segundos con descarga directa, sin pasos extra ni esperas.</p>
+      </div>
+      <div class="info-card">
+        <div class="ic">🎨</div>
+        <h3>8 formatos</h3>
+        <p>JPG, PNG, WebP, GIF, BMP, TIFF, ICO y PDF. El convertidor más completo.</p>
+      </div>
+    </div>
+
+    <div class="section-wrap">
+      <h2>Guía de formatos</h2>
+      <p class="scroll-hint"><i class="fas fa-hand-point-right"></i> Desliza para ver más</p>
+      <div class="table-scroll">
+        <table class="fmt-table">
+          <thead>
+            <tr>
+              <th>Formato</th>
+              <th>Ideal para</th>
+              <th>Tipo</th>
+              <th>Transparencia</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>WebP</strong></td><td>Web, SEO, velocidad de carga</td><td><span class="tag tag-web">Web</span></td><td>✅ Sí</td></tr>
+            <tr><td><strong>JPG / JPEG</strong></td><td>Fotografías, redes sociales</td><td><span class="tag tag-web">Web</span></td><td>❌ No</td></tr>
+            <tr><td><strong>PNG</strong></td><td>Logos, gráficos, capturas</td><td><span class="tag tag-loss">Lossless</span></td><td>✅ Sí</td></tr>
+            <tr><td><strong>GIF</strong></td><td>Animaciones, miniaturas</td><td><span class="tag tag-web">Web</span></td><td>✅ Sí</td></tr>
+            <tr><td><strong>BMP</strong></td><td>Windows, sin compresión</td><td><span class="tag tag-loss">Lossless</span></td><td>❌ No</td></tr>
+            <tr><td><strong>TIFF</strong></td><td>Imprenta, alta calidad</td><td><span class="tag tag-loss">Lossless</span></td><td>✅ Sí</td></tr>
+            <tr><td><strong>ICO</strong></td><td>Favicons, íconos de Windows</td><td><span class="tag tag-icon">Ícono</span></td><td>✅ Sí</td></tr>
+            <tr><td><strong>PDF</strong></td><td>Documentos, portafolios, impresión</td><td><span class="tag tag-doc">Documento</span></td><td>❌ No</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tools-wrap">
+      <h2>Otras herramientas gratuitas</h2>
+      <div class="tools-row">
+        <a href="{% url 'generar_qr' %}" class="tool-btn"><i class="fas fa-qrcode"></i> Generar QR</a>
+        <a href="{% url 'inicio' %}" class="tool-btn"><i class="fas fa-globe"></i> Desarrollo Web</a>
+      </div>
+    </div>
+
+  </main>
+  </div><!-- /tab-convert -->
+
+  <!-- ══ TAB: VIDEO A GIF ══════════════════════════════════════ -->
+  <div id="tab-videogif" class="tab-panel">
+  <main>
+    <div class="card">
+
+      <div class="format-bar">
+        <p class="format-bar-title"><i class="fas fa-film"></i> &nbsp;Convierte video a GIF animado</p>
+        <p style="font-size:.82rem;color:#777;margin-top:4px;">Sube un video (MP4, MOV, AVI, WEBM) y descarga un GIF optimizado.</p>
+      </div>
+
+      <!-- GIF options -->
+      <div class="gif-options">
+        <div class="opt-group">
+          <label>FPS <span class="opt-val" id="fps-val">10</span></label>
+          <input type="range" id="gif-fps" min="3" max="24" value="10"
+                 oninput="document.getElementById('fps-val').textContent=this.value">
+        </div>
+        <div class="opt-group">
+          <label>Ancho (px) — 0 = original</label>
+          <input type="number" id="gif-width" value="480" min="0" max="1920" step="10">
+        </div>
+        <div class="opt-group">
+          <label>Inicio (seg)</label>
+          <input type="number" id="gif-start" value="0" min="0" step="0.5">
+        </div>
+        <div class="opt-group">
+          <label>Duración (seg) — 0 = todo</label>
+          <input type="number" id="gif-duration" value="5" min="0" step="0.5">
+        </div>
+      </div>
+
+      <!-- Drop zone video -->
+      <form method="POST" enctype="multipart/form-data" id="gif-form"
+            action="{% url 'convertir_video_gif' %}">
+        {% csrf_token %}
+        <input type="hidden" name="gif_fps"      id="h-fps"      value="10">
+        <input type="hidden" name="gif_width"    id="h-width"    value="480">
+        <input type="hidden" name="gif_start"    id="h-start"    value="0">
+        <input type="hidden" name="gif_duration" id="h-duration" value="5">
+
+        <div class="drop-area">
+          <div class="drop-zone" id="video-drop-zone">
+            <input type="file" name="video" id="video-input" accept="video/*">
+            <div class="drop-icon" style="background:#fff3e0;color:#ff9800;">
+              <i class="fas fa-film"></i>
+            </div>
+            <h2>Arrastra tu video aquí</h2>
+            <p>o haz clic para seleccionarlo — MP4, MOV, AVI, WEBM…</p>
+            <span class="drop-hint" id="video-file-name">Sin video seleccionado</span>
+          </div>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-wrap" id="gif-progress">
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="gif-progress-fill"></div>
+          </div>
+          <p class="progress-label" id="gif-progress-label">Procesando video…</p>
+        </div>
+
+        <div class="action-bar">
+          <span id="gif-file-label" style="flex:1;font-size:.875rem;color:#777;">Sin video seleccionado</span>
+          <button type="submit" class="btn-convert" id="gif-btn" disabled
+                  style="background:#ff9800;box-shadow:0 4px 14px rgba(255,152,0,.3);">
+            <i class="fas fa-film"></i> Convertir a GIF
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card"><div class="ic">🎬</div><h3>Todos los formatos</h3><p>MP4, MOV, AVI, WEBM y más.</p></div>
+      <div class="info-card"><div class="ic">⚙️</div><h3>Control total</h3><p>Ajusta FPS, tamaño, inicio y duración.</p></div>
+      <div class="info-card"><div class="ic">🪶</div><h3>GIF optimizado</h3><p>Paleta de colores optimizada automáticamente.</p></div>
+    </div>
+  </main>
+  </div><!-- /tab-videogif -->
+
+  <!-- ══ TAB: QUITAR FONDO ══════════════════════════════════════ -->
+  <div id="tab-rembg" class="tab-panel">
+  <main>
+    <div class="card">
+
+      <div class="format-bar">
+        <p class="format-bar-title"><i class="fas fa-magic"></i> &nbsp;Quitar fondo de imagen con IA</p>
+        <p style="font-size:.82rem;color:#777;margin-top:4px;">Sube una imagen, elige un fondo nuevo (o transparente) y descarga.</p>
+      </div>
+
+      <!-- Selector de fondo -->
+      <div class="bg-selector">
+        <h3>Fondo del resultado</h3>
+        <div class="bg-grid">
+          <div class="bg-swatch transparent-swatch selected" data-bg="transparent" title="Transparente (PNG)"></div>
+          <div class="bg-swatch selected" style="background:#fff;" data-bg="#ffffff" title="Blanco"></div>
+          <div class="bg-swatch" style="background:#000;" data-bg="#000000" title="Negro"></div>
+          <div class="bg-swatch" style="background:#f0f2f5;" data-bg="#f0f2f5" title="Gris claro"></div>
+          <div class="bg-swatch" style="background:#1a1a2e;" data-bg="#1a1a2e" title="Azul oscuro"></div>
+          <div class="bg-swatch" style="background:#25d366;" data-bg="#25d366" title="Verde"></div>
+          <div class="bg-swatch" style="background:#e63946;" data-bg="#e63946" title="Rojo"></div>
+          <div class="bg-swatch" style="background:#4361ee;" data-bg="#4361ee" title="Azul"></div>
+          <div class="bg-swatch" style="background:#f8961e;" data-bg="#f8961e" title="Naranja"></div>
+          <div class="bg-swatch" style="background:#f9c74f;" data-bg="#f9c74f" title="Amarillo"></div>
+          <div class="bg-swatch" style="background:linear-gradient(135deg,#667eea,#764ba2);" data-bg="gradient-purple" title="Gradiente morado"></div>
+          <div class="bg-swatch" style="background:linear-gradient(135deg,#f093fb,#f5576c);" data-bg="gradient-pink" title="Gradiente rosa"></div>
+          <div class="bg-swatch" style="background:linear-gradient(135deg,#4facfe,#00f2fe);" data-bg="gradient-blue" title="Gradiente azul"></div>
+          <div class="bg-swatch" style="background:linear-gradient(135deg,#43e97b,#38f9d7);" data-bg="gradient-green" title="Gradiente verde"></div>
+          <div class="bg-swatch" style="background:linear-gradient(135deg,#fa709a,#fee140);" data-bg="gradient-sunset" title="Gradiente sunset"></div>
+          <div class="bg-custom-wrap">
+            <input type="color" id="bg-custom-color" value="#ffffff" title="Color personalizado">
+            <span class="bg-custom-label">Custom</span>
+          </div>
+          <label class="bg-upload-label" title="Subir imagen de fondo">
+            <i class="fas fa-image"></i> Imagen
+            <input type="file" id="bg-image-input" accept="image/*" style="display:none;">
+          </label>
+        </div>
+      </div>
+
+      <!-- Drop zone imagen -->
+      <form enctype="multipart/form-data" id="rmbg-form">
+        {% csrf_token %}
+
+        <div class="drop-area">
+          <div class="drop-zone" id="rmbg-drop-zone">
+            <input type="file" name="imagen" id="rmbg-input" accept="image/*">
+            <div class="drop-icon" style="background:#f3e5f5;color:#9c27b0;">
+              <i class="fas fa-magic"></i>
+            </div>
+            <h2>Arrastra tu imagen aquí</h2>
+            <p>o haz clic para seleccionarla</p>
+            <span class="drop-hint">JPG, PNG, WebP…</span>
+          </div>
+        </div>
+
+        <!-- Preview antes/después -->
+        <div id="rmbg-previews" style="display:none;padding:0 28px 8px;">
+          <div class="rmbg-layout">
+            <div>
+              <p style="font-size:.75rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">Original</p>
+              <div class="rmbg-preview-box"><img id="rmbg-original-img" src="" alt="Original"></div>
+            </div>
+            <div>
+              <p style="font-size:.75rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">Vista previa del fondo</p>
+              <div class="rmbg-preview-box" id="rmbg-bg-preview">
+                <p class="preview-placeholder">Se mostrará después de procesar</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-wrap" id="rmbg-progress">
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="rmbg-progress-fill"></div>
+          </div>
+          <p class="progress-label">Procesando con IA… puede tomar 10-30 segundos</p>
+        </div>
+
+        <div class="action-bar">
+          <span id="rmbg-file-label" style="flex:1;font-size:.875rem;color:#777;">Sin imagen seleccionada</span>
+          <button type="submit" class="btn-convert" id="rmbg-btn" disabled
+                  style="background:#9c27b0;box-shadow:0 4px 14px rgba(156,39,176,.3);">
+            <i class="fas fa-magic"></i> Quitar Fondo
+          </button>
+        </div>
+      </form>
+
+      <!-- ── RESULTADO ── -->
+      <div id="rmbg-result-section" style="display:none;">
+        <div style="padding:0 28px 14px;">
+          <div style="height:1px;background:#e8eaed;margin-bottom:20px;"></div>
+          <p style="font-size:.75rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">
+            ✅ Fondo eliminado — elige un fondo y descarga
+          </p>
+          <div id="rmbg-result-canvas-wrap"
+               style="width:100%;max-width:400px;margin:0 auto 18px;border-radius:14px;overflow:hidden;
+                      border:1.5px solid #e8eaed;aspect-ratio:1;position:relative;background:
+                      repeating-conic-gradient(#e0e0e0 0% 25%,#fff 0% 50%) 0 0/16px 16px;">
+            <canvas id="rmbg-result-canvas"
+                    style="width:100%;height:100%;object-fit:contain;display:block;"></canvas>
+          </div>
+          <div class="bg-selector" style="padding:0 0 10px;">
+            <h3>Elegir fondo</h3>
+            <div class="bg-grid" id="result-bg-grid">
+              <div class="bg-swatch transparent-swatch selected" data-bg="transparent" title="Transparente"></div>
+              <div class="bg-swatch" style="background:#fff;"    data-bg="#ffffff" title="Blanco"></div>
+              <div class="bg-swatch" style="background:#000;"    data-bg="#000000" title="Negro"></div>
+              <div class="bg-swatch" style="background:#f0f2f5;" data-bg="#f0f2f5" title="Gris claro"></div>
+              <div class="bg-swatch" style="background:#1a1a2e;" data-bg="#1a1a2e" title="Azul oscuro"></div>
+              <div class="bg-swatch" style="background:#25d366;" data-bg="#25d366" title="Verde"></div>
+              <div class="bg-swatch" style="background:#e63946;" data-bg="#e63946" title="Rojo"></div>
+              <div class="bg-swatch" style="background:#4361ee;" data-bg="#4361ee" title="Azul"></div>
+              <div class="bg-swatch" style="background:#f8961e;" data-bg="#f8961e" title="Naranja"></div>
+              <div class="bg-swatch" style="background:#f9c74f;" data-bg="#f9c74f" title="Amarillo"></div>
+              <div class="bg-swatch" style="background:linear-gradient(135deg,#667eea,#764ba2);" data-bg="gradient-purple" title="Gradiente morado"></div>
+              <div class="bg-swatch" style="background:linear-gradient(135deg,#f093fb,#f5576c);" data-bg="gradient-pink"   title="Gradiente rosa"></div>
+              <div class="bg-swatch" style="background:linear-gradient(135deg,#4facfe,#00f2fe);" data-bg="gradient-blue"   title="Gradiente azul"></div>
+              <div class="bg-swatch" style="background:linear-gradient(135deg,#43e97b,#38f9d7);" data-bg="gradient-green"  title="Gradiente verde"></div>
+              <div class="bg-swatch" style="background:linear-gradient(135deg,#fa709a,#fee140);" data-bg="gradient-sunset" title="Gradiente sunset"></div>
+              <div class="bg-custom-wrap">
+                <input type="color" id="result-bg-custom-color" value="#ffffff" title="Color personalizado">
+                <span class="bg-custom-label">Custom</span>
+              </div>
+              <label class="bg-upload-label" title="Subir imagen de fondo">
+                <i class="fas fa-image"></i> Imagen
+                <input type="file" id="result-bg-image-input" accept="image/*" style="display:none;">
+              </label>
+            </div>
+          </div>
+          <div class="action-bar" style="padding:10px 0 0;">
+            <button class="btn-convert" id="rmbg-download-btn"
+                    style="background:#9c27b0;box-shadow:0 4px 14px rgba(156,39,176,.3);">
+              <i class="fas fa-download"></i> Descargar imagen
+            </button>
+            <button type="button" id="rmbg-reset-btn"
+                    style="background:none;border:1.5px solid #d0d3d9;color:#555;font-family:Roboto,sans-serif;
+                           font-size:.88rem;font-weight:700;padding:12px 18px;border-radius:12px;cursor:pointer;">
+              <i class="fas fa-redo"></i> Nueva imagen
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card"><div class="ic">🤖</div><h3>IA avanzada</h3><p>Motor u2net — mismo modelo que usan herramientas de pago.</p></div>
+      <div class="info-card"><div class="ic">🎨</div><h3>15+ fondos</h3><p>Transparente, colores sólidos, gradientes o tu propia imagen.</p></div>
+      <div class="info-card"><div class="ic">📥</div><h3>Tú decides</h3><p>Previsualiza el fondo en tiempo real antes de descargar.</p></div>
+    </div>
+  </main>
+  </div><!-- /tab-rembg -->
+
+  <!-- ══ CONTACT FORM ═══════════════════════════════════════════ -->
+  <form method="post" id="contacto" class="animate-on-scroll slide-up delay-2">
+    <p>Si tienes preguntas, comentarios o deseas más información sobre nuestros servicios...</p>
+    {% csrf_token %}
+    <div>
+      <label for="{{ form.name.id_for_label }}">Nombre:</label>
+      {{ form.name }}
+    </div>
+    <div>
+      <label for="{{ form.email.id_for_label }}">Correo Electrónico:</label>
+      {{ form.email }}
+    </div>
+    <div>
+      <label for="{{ form.phone.id_for_label }}">Número de Teléfono:</label>
+      {{ form.phone }}
+    </div>
+    <div>
+      <label for="{{ form.message.id_for_label }}">Mensaje:</label>
+      {{ form.message }}
+    </div>
+    {{ form.captcha }}
+    <button type="submit">Enviar</button>
+    <h4 style="font-size:12px;color:rgba(255,255,255,0.5);font-family:sans-serif;text-align:center;margin-top:10px;">
+      Este sitio está protegido por reCAPTCHA. Aplican la
+      <a href="https://policies.google.com/privacy" target="_blank" style="color:#fff;">Política de Privacidad</a>
+      y los
+      <a href="https://policies.google.com/terms" target="_blank" style="color:#fff;">Términos de Servicio</a>
+      de Google.
+    </h4>
+  </form>
+
+  <!-- ══ FOOTER ═════════════════════════════════════════════════ -->
+  <footer id="footer" class="animate-on-scroll fade-in delay-1">
+    <p id="footer-copy">&copy; 2024 Proyecto Digital. Todos los derechos reservados.</p>
+    <p id="footer-contact">
+      Contactanos:
+      <a href="enviar_email" id="footer-email">proyectodigitalmexico@gmail.com</a> |
+      <span id="footer-phone">+1 (615) 938-0458</span>
+    </p>
+    <div id="social-links">
+      <a href="https://wa.me/+16159380458" target="_blank">WhatsApp</a>
+      <a href="https://www.facebook.com/profile.php?id=61553413180841" target="_blank">Facebook</a>
+      <a href="https://www.webdevelopermx.com" target="_blank">Website</a>
+    </div>
+    <div id="social-icons">
+      <a href="https://wa.me/+16159380458" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.facebook.com/profile.php?id=61553413180841" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.webdevelopermx.com" target="_blank"><i class="fas fa-globe"></i></a>
+    </div>
+    <p id="footer-links">
+      <a href="politica_privacidad">Politica de Privacidad</a> |
+      <a href="terminos_condiciones">Terminos del Servicio</a>
+    </p>
+    <p id="footer-quick-links">
+      <a href="{% url 'about_us' %}">Acerca de Nosotros</a> |
+      <a href="#obten_mas_que_un_sitio_web">Servicios</a>
+    </p>
+    <form id="newsletter-form" action="{% url 'subscribe' %}" method="POST">
+      {% csrf_token %}
+      <label for="newsletter-email" id="newsletter-email-label">Subscribe to our newsletter</label>
+      <input type="email" name="email" id="newsletter-email" placeholder="Enter your email" required>
+      <button type="submit" id="newsletter-button">Subscribe</button>
+    </form>
+  </footer>
+
+  <!-- ══ LOADING OVERLAY ════════════════════════════════════════ -->
+  <div id="loading">
+    <div class="spinner"></div>
+    <p id="loading-msg">Convirtiendo imágenes…</p>
+    <small>Esto puede tardar unos segundos</small>
+  </div>
+
+  <!-- ══ JAVASCRIPT ═════════════════════════════════════════════ -->
+  <script>
+    /* ─── Shared helpers ─────────────────────────────────────── */
+    function getCsrf() {
+      const c = document.cookie.split(';').map(s => s.trim()).find(s => s.startsWith('csrftoken='));
+      return c ? decodeURIComponent(c.split('=')[1]) : '';
+    }
+
+    function showLoading(msg) {
+      document.getElementById('loading-msg').textContent = msg || 'Procesando…';
+      document.getElementById('loading').classList.add('active');
+    }
+
+    function hideLoading() {
+      document.getElementById('loading').classList.remove('active');
+    }
+
+    /* FIX: lógica simplificada — siempre usa form.action directamente */
+    async function submitFormAsDownload(form, btnEl, loadingMsg) {
+      const fd = new FormData(form);
+      showLoading(loadingMsg);
+      if (btnEl) btnEl.disabled = true;
+
+      try {
+        const resp = await fetch(form.action, {
+          method: 'POST',
+          body: fd,
+          credentials: 'same-origin',
+          headers: { 'X-CSRFToken': getCsrf() },
+        });
+
+        if (!resp.ok) {
+          const txt = await resp.text();
+          throw new Error('Error ' + resp.status + ': ' + txt.substring(0, 300));
+        }
+
+        const ct = resp.headers.get('Content-Type') || '';
+        const isFile = ct.includes('image/') || ct.includes('application/pdf') ||
+                       ct.includes('application/zip') || ct.includes('application/octet-stream');
+
+        if (!isFile) {
+          const txt = await resp.text();
+          const match = txt.match(/<[^>]*class="[^"]*errornote[^"]*"[^>]*>([^<]+)/i)
+                     || txt.match(/<p[^>]*>([^<]{10,200})<\/p>/i);
+          const msg = match ? match[1].trim() : txt.substring(0, 400);
+          throw new Error('El servidor respondió con HTML en lugar de un archivo.\n\nDetalle: ' + msg);
+        }
+
+        const blob = await resp.blob();
+        const disposition = resp.headers.get('Content-Disposition') || '';
+        let filename = 'archivo';
+        const m = disposition.match(/filename[^;=\n]*=["\']?([^"\'\n;]+)["\']?/);
+        if (m) filename = m[1].replace(/["\']/g, '').trim();
+
+        const url = URL.createObjectURL(blob);
+        const a   = Object.assign(document.createElement('a'), { href: url, download: filename });
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 8000);
+
+      } catch (err) {
+        console.error(err);
+        alert('❌ ' + err.message);
+      } finally {
+        hideLoading();
+        if (btnEl) btnEl.disabled = false;
+      }
+    }
+
+    /* ─── TAB SWITCHING ──────────────────────────────────────── */
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    /* ─── TAB 1: CONVERTIR IMÁGENES ──────────────────────────── */
+    const fmtFrom     = document.getElementById('fmt-from');
+    const fmtTo       = document.getElementById('fmt-to');
+    const hiddenFmt   = document.getElementById('formato_destino');
+    const fileInput   = document.getElementById('file-input');
+    const dropZone    = document.getElementById('drop-zone');
+    const previewWrap = document.getElementById('preview-wrap');
+    const previewGrid = document.getElementById('preview-grid');
+    const previewCount= document.getElementById('preview-count');
+    const fileCountLbl= document.getElementById('file-count-label');
+    const btnSubmit   = document.getElementById('btn-submit');
+    const btnLabel    = document.getElementById('btn-label');
+    const btnClear    = document.getElementById('btn-clear');
+    const dropHint    = document.getElementById('drop-hint');
+    const convForm    = document.getElementById('conv-form');
+
+    let dt = new DataTransfer();
+
+    function updateUI() {
+      const dest = fmtTo.value;
+      hiddenFmt.value = dest;
+      btnLabel.textContent = 'Convertir a ' + dest.toUpperCase();
+      const from = fmtFrom.value;
+      dropHint.textContent = from
+        ? 'Acepta archivos .' + from.toUpperCase()
+        : 'Acepta: JPG, PNG, WebP, GIF, BMP, TIFF, ICO…';
+    }
+    fmtTo.addEventListener('change', updateUI);
+    fmtFrom.addEventListener('change', updateUI);
+    updateUI();
+
+    dropZone.addEventListener('dragover', e => {
+      if (e.dataTransfer.types.includes('Files')) { e.preventDefault(); dropZone.classList.add('dragover'); }
+    });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault(); dropZone.classList.remove('dragover');
+      addFiles(e.dataTransfer.files);
+    });
+    fileInput.addEventListener('change', () => { addFiles(fileInput.files); fileInput.value = ''; });
+
+    function addFiles(files) {
+      for (const f of files) {
+        if (!f.type.startsWith('image/') && !f.name.toLowerCase().endsWith('.ico')) continue;
+        dt.items.add(f);
+      }
+      renderPreviews();
+    }
+
+    function renderPreviews() {
+      previewGrid.innerHTML = '';
+      const files = dt.files;
+      for (let i = 0; i < files.length; i++) {
+        const f    = files[i];
+        const item = document.createElement('div');
+        item.className = 'prev-item';
+        const img = document.createElement('img');
+        if (f.name.toLowerCase().endsWith('.ico')) {
+          img.src = 'data:image/svg+xml,' + encodeURIComponent(
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">' +
+            '<rect width="64" height="64" rx="10" fill="#f0f2f5"/>' +
+            '<text x="32" y="40" text-anchor="middle" font-size="20" fill="#555" font-family="Arial" font-weight="bold">ICO</text></svg>'
+          );
+        } else {
+          const reader = new FileReader();
+          reader.onload = ev => img.src = ev.target.result;
+          reader.readAsDataURL(f);
+        }
+        const rm = Object.assign(document.createElement('button'), { type:'button', className:'prev-remove', innerHTML:'✕' });
+        rm.dataset.index = i;
+        const nm = Object.assign(document.createElement('span'), { className:'prev-name', textContent: f.name });
+        item.append(img, rm, nm);
+        previewGrid.appendChild(item);
+      }
+      const n = files.length;
+      if (n > 0) {
+        previewWrap.classList.add('visible');
+        previewCount.textContent  = n + ' archivo' + (n>1?'s':'') + ' seleccionado' + (n>1?'s':'');
+        fileCountLbl.textContent  = n + ' imagen' + (n>1?'es':'') + ' lista' + (n>1?'s':'');
+        btnSubmit.disabled = false;
+      } else {
+        previewWrap.classList.remove('visible');
+        fileCountLbl.textContent = 'Sin archivos seleccionados';
+        btnSubmit.disabled = true;
+      }
+      fileInput.files = dt.files;
+    }
+
+    previewGrid.addEventListener('click', e => {
+      const btn = e.target.closest('.prev-remove');
+      if (!btn) return;
+      dt.items.remove(parseInt(btn.dataset.index));
+      renderPreviews();
+    });
+    btnClear.addEventListener('click', () => { dt = new DataTransfer(); renderPreviews(); });
+
+    convForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      fileInput.files = dt.files;
+      if (dt.files.length === 0) return;
+      const dest = fmtTo.value;
+      await submitFormAsDownload(
+        convForm, btnSubmit,
+        dest === 'pdf' ? 'Generando PDF…' : 'Convirtiendo a ' + dest.toUpperCase() + '…'
+      );
+    });
+
+    /* ─── TAB 2: VIDEO A GIF ─────────────────────────────────── */
+    const videoInput  = document.getElementById('video-input');
+    const videoLabel  = document.getElementById('gif-file-label');
+    const videoName   = document.getElementById('video-file-name');
+    const gifBtn      = document.getElementById('gif-btn');
+    const gifForm     = document.getElementById('gif-form');
+    const gifProgress = document.getElementById('gif-progress');
+    const gifFill     = document.getElementById('gif-progress-fill');
+
+    videoInput.addEventListener('change', () => {
+      const f = videoInput.files[0];
+      if (f) { videoLabel.textContent = f.name; videoName.textContent = f.name; gifBtn.disabled = false; }
+    });
+
+    const videoDrop = document.getElementById('video-drop-zone');
+    videoDrop.addEventListener('dragover', e => { e.preventDefault(); videoDrop.classList.add('dragover'); });
+    videoDrop.addEventListener('dragleave', () => videoDrop.classList.remove('dragover'));
+    videoDrop.addEventListener('drop', e => {
+      e.preventDefault(); videoDrop.classList.remove('dragover');
+      if (e.dataTransfer.files[0]) {
+        const dt2 = new DataTransfer(); dt2.items.add(e.dataTransfer.files[0]);
+        videoInput.files = dt2.files; videoInput.dispatchEvent(new Event('change'));
+      }
+    });
+
+    gifForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      document.getElementById('h-fps').value      = document.getElementById('gif-fps').value;
+      document.getElementById('h-width').value    = document.getElementById('gif-width').value;
+      document.getElementById('h-start').value    = document.getElementById('gif-start').value;
+      document.getElementById('h-duration').value = document.getElementById('gif-duration').value;
+
+      gifProgress.classList.add('visible');
+      gifBtn.disabled = true;
+      let pct = 0;
+      const prog = setInterval(() => {
+        pct = Math.min(pct + Math.random() * 3, 88);
+        gifFill.style.width = pct + '%';
+      }, 600);
+
+      await submitFormAsDownload(gifForm, null, 'Convirtiendo video a GIF…');
+
+      clearInterval(prog);
+      gifFill.style.width = '100%';
+      setTimeout(() => {
+        gifProgress.classList.remove('visible');
+        gifFill.style.width = '0%';
+        gifBtn.disabled = false;
+      }, 600);
+    });
+
+    /* ─── TAB 3: QUITAR FONDO ────────────────────────────────── */
+    const rmbgInput     = document.getElementById('rmbg-input');
+    const rmbgFileLabel = document.getElementById('rmbg-file-label');
+    const rmbgBtn       = document.getElementById('rmbg-btn');
+    const rmbgForm      = document.getElementById('rmbg-form');
+    const rmbgPreviews  = document.getElementById('rmbg-previews');
+    const rmbgOrigImg   = document.getElementById('rmbg-original-img');
+    const rmbgProgress  = document.getElementById('rmbg-progress');
+    const rmbgFill      = document.getElementById('rmbg-progress-fill');
+    const rmbgResultSection = document.getElementById('rmbg-result-section');
+    const rmbgCanvas    = document.getElementById('rmbg-result-canvas');
+    const rmbgCtx       = rmbgCanvas.getContext('2d');
+
+    const GRADIENTS_CSS = {
+      'gradient-purple': ['#667eea','#764ba2'],
+      'gradient-pink':   ['#f093fb','#f5576c'],
+      'gradient-blue':   ['#4facfe','#00f2fe'],
+      'gradient-green':  ['#43e97b','#38f9d7'],
+      'gradient-sunset': ['#fa709a','#fee140'],
+    };
+
+    let fgImage       = null;
+    let fgFilename    = '';
+    let resultBg      = 'transparent';
+    let resultBgImage = null;
+
+    function renderCanvas() {
+      if (!fgImage) return;
+      const W = fgImage.naturalWidth  || fgImage.width;
+      const H = fgImage.naturalHeight || fgImage.height;
+      rmbgCanvas.width  = W;
+      rmbgCanvas.height = H;
+      rmbgCtx.clearRect(0, 0, W, H);
+
+      if (resultBg === 'transparent') {
+        // transparente
+      } else if (resultBg === 'image' && resultBgImage) {
+        rmbgCtx.drawImage(resultBgImage, 0, 0, W, H);
+      } else if (GRADIENTS_CSS[resultBg]) {
+        const [c1, c2] = GRADIENTS_CSS[resultBg];
+        const grad = rmbgCtx.createLinearGradient(0, 0, W, H);
+        grad.addColorStop(0, c1); grad.addColorStop(1, c2);
+        rmbgCtx.fillStyle = grad;
+        rmbgCtx.fillRect(0, 0, W, H);
+      } else {
+        rmbgCtx.fillStyle = resultBg;
+        rmbgCtx.fillRect(0, 0, W, H);
+      }
+      rmbgCtx.drawImage(fgImage, 0, 0);
+    }
+
+    document.querySelectorAll('#result-bg-grid .bg-swatch').forEach(sw => {
+      sw.addEventListener('click', () => {
+        document.querySelectorAll('#result-bg-grid .bg-swatch').forEach(s => s.classList.remove('selected'));
+        sw.classList.add('selected');
+        resultBg = sw.dataset.bg;
+        resultBgImage = null;
+        renderCanvas();
+      });
+    });
+
+    document.getElementById('result-bg-custom-color').addEventListener('input', function() {
+      document.querySelectorAll('#result-bg-grid .bg-swatch').forEach(s => s.classList.remove('selected'));
+      resultBg = this.value;
+      resultBgImage = null;
+      renderCanvas();
+    });
+
+    document.getElementById('result-bg-image-input').addEventListener('change', function() {
+      const f = this.files[0]; if (!f) return;
+      const img = new Image();
+      const url = URL.createObjectURL(f);
+      img.onload = () => { resultBgImage = img; resultBg = 'image'; renderCanvas(); };
+      img.src = url;
+    });
+
+    rmbgInput.addEventListener('change', () => {
+      const f = rmbgInput.files[0];
+      if (f) {
+        rmbgFileLabel.textContent = f.name;
+        rmbgBtn.disabled = false;
+        const reader = new FileReader();
+        reader.onload = ev => {
+          rmbgOrigImg.src = ev.target.result;
+          rmbgPreviews.style.display = 'block';
+        };
+        reader.readAsDataURL(f);
+      }
+    });
+
+    const rmbgDrop = document.getElementById('rmbg-drop-zone');
+    rmbgDrop.addEventListener('dragover', e => { e.preventDefault(); rmbgDrop.classList.add('dragover'); });
+    rmbgDrop.addEventListener('dragleave', () => rmbgDrop.classList.remove('dragover'));
+    rmbgDrop.addEventListener('drop', e => {
+      e.preventDefault(); rmbgDrop.classList.remove('dragover');
+      if (e.dataTransfer.files[0]) {
+        const dt3 = new DataTransfer(); dt3.items.add(e.dataTransfer.files[0]);
+        rmbgInput.files = dt3.files; rmbgInput.dispatchEvent(new Event('change'));
+      }
+    });
+
+    rmbgForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      rmbgProgress.classList.add('visible');
+      rmbgBtn.disabled = true;
+      let pct = 0;
+      const prog = setInterval(() => {
+        pct = Math.min(pct + Math.random() * 2, 88);
+        rmbgFill.style.width = pct + '%';
+      }, 700);
+
+      const fd = new FormData(rmbgForm);
+      fd.append('csrfmiddlewaretoken', document.querySelector('#rmbg-form [name=csrfmiddlewaretoken]').value);
+
+      showLoading('Quitando fondo con IA… puede tardar 15-30 segundos');
+
+      try {
+        const resp = await fetch("{% url 'quitar_fondo' %}", {
+          method: 'POST',
+          body: fd,
+          credentials: 'same-origin',
+          headers: { 'X-CSRFToken': getCsrf() },
+        });
+
+        const rawText = await resp.text();
+        let data;
+        try {
+          data = JSON.parse(rawText);
+        } catch (_) {
+          throw new Error('El servidor devolvió una respuesta inesperada:\n' + rawText.substring(0, 300));
+        }
+
+        if (!resp.ok || !data.ok) {
+          throw new Error(data.error || 'Error del servidor (' + resp.status + ')');
+        }
+
+        fgImage    = new Image();
+        fgFilename = data.filename || 'imagen';
+        fgImage.onload = () => {
+          rmbgResultSection.style.display = 'block';
+          renderCanvas();
+        };
+        fgImage.src = 'data:image/png;base64,' + data.png_b64;
+
+        setTimeout(() => rmbgResultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 200);
+
+      } catch (err) {
+        console.error(err);
+        alert('❌ ' + err.message);
+      } finally {
+        hideLoading();
+        clearInterval(prog);
+        rmbgFill.style.width = '100%';
+        setTimeout(() => {
+          rmbgProgress.classList.remove('visible');
+          rmbgFill.style.width = '0%';
+          rmbgBtn.disabled = false;
+        }, 600);
+      }
+    });
+
+    document.getElementById('rmbg-download-btn').addEventListener('click', () => {
+      if (!fgImage) return;
+      const suffix = resultBg === 'transparent' ? '_sin_fondo' : '_nuevo_fondo';
+      rmbgCanvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        const a   = Object.assign(document.createElement('a'), {
+          href: url, download: fgFilename + suffix + '.png'
+        });
+        document.body.appendChild(a); a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 5000);
+      }, 'image/png');
+    });
+
+    document.getElementById('rmbg-reset-btn').addEventListener('click', () => {
+      fgImage = null; fgFilename = ''; resultBg = 'transparent'; resultBgImage = null;
+      rmbgResultSection.style.display = 'none';
+      rmbgPreviews.style.display = 'none';
+      rmbgInput.value = '';
+      rmbgFileLabel.textContent = 'Sin imagen seleccionada';
+      rmbgBtn.disabled = true;
+      rmbgCtx.clearRect(0, 0, rmbgCanvas.width, rmbgCanvas.height);
+      document.querySelectorAll('#result-bg-grid .bg-swatch').forEach((s,i) => {
+        s.classList.toggle('selected', i === 0);
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+/*AQUI VAMOS A DEFINIR UNA NUEVA ESTRUCTURA PARA FUENTES NUEVAS*/ 
+/* EL PESO DE LAS FUENTES EXISTE SOLAMENTE DE 100 A 500 y de 600 a 900 , SOLO HAY 2 DIFERENCIAS DE CAMBIOS */
+
+@font-face{
+    font-family:"cinzel-light";
+    src: url(/static/fuentes/cinzel.ttf) format("truetype");/*ttf SIGNIFICA Truetype*/
+    font-weight: 400;
+    
+    
+}
+
+@font-face{
+    font-family:"cinzel-strong";
+    src: url(/static/fuentes/cinzel.ttf) format("truetype");
+    font-weight: 800;
+    
+    
+}
+
+/*#######################################################################*/
+
+
+@font-face{
+    font-family:"montserrat-light";
+    src: url(/static/fuentes/montserrat.ttf) format("truetype");
+    font-weight: 400;
+    
+    
+}
+
+@font-face{
+    font-family:"montserrat-strong";
+    src: url(/static/fuentes/montserrat.ttf) format("truetype");
+    font-weight: 800;
+    
+    
+}

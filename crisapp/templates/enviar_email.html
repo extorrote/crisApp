@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {%load static%}
+  <meta name="author" content="CHRISTHIAN STEPHEN ">
+
+  <title> Desarrollo de Paginas y Aplicaciones Web Puerto Vallarta y todo Mexico</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" /><!--ICONOS GG-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="programador" content="christian stephen">
+<meta name="description" content="Desarrollador web Christian Stephen dedicado a crear sitios y aplicaciones que reflejen los valores y principios de tu negocio por medio del mundo digital. Comprometido con la excelencia técnica y la integridad ética en cada proyecto, utilizando mis habilidades para impactar positivamente en línea con mi trabajo.">
+<meta name="keywords" content="Desarrollo Web Puerto Vallarta Mexico, Desarrollador web de aplicaciones web, Sitios web acorde a las necesidades de tu negocio, Desarrollador web, Diseño web, Programación, programador web, Experto en desarrollo y hosting web, desarrollo digital">
+
+<meta name="title" content="Desarrollo Web 100% Personalizado | Métodos y Diseño Personalizado Dependiendo de las Necesidades de Tu negocio">
+<link rel="icon" href="{% static 'images/foto-tarjeta-ico.ico' %}" alt="logo pagina">
+
+<meta property="og:title" content="Puerto Vallarta Web Developer">
+<meta property="og:image" content="/static/images/paginas_web_puerto_vallarta.png" type="image/png">
+<meta property="og:description" content="Desarrollador web Christian Stephen dedicado a crear sitios y aplicaciones que reflejen los valores y principios de tu negocio por medio del mundo digital. Comprometido con la excelencia técnica y la integridad ética en cada proyecto, utilizando mis habilidades para impactar positivamente en línea con mi trabajo.">
+  
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-image:linear-gradient(rgba(0, 0, 255, 0.107),rgba(0, 0, 255, 0.221)),url(/static/images/imagen_teclado.png); 
+        background-repeat:no-repeat;
+        background-size:cover;
+        display: block;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      /* Main menu styles */
+.main-menu {
+  flex-grow: 1;
+  text-align: center;
+  border-top:1px solid rgba(255, 255, 255, 0.557);
+}
+
+.main-menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+
+.main-menu ul li {
+  display: inline-block;
+  margin: 0 10px;
+  margin-bottom: 5px;
+  position: relative;
+  background-color: #5555553f;
+  border-radius: 5px;
+}
+
+.main-menu ul li a {
+  display: block;
+  padding: 10px 20px;
+  color: rgba(255, 255, 255, 0.635);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  font-family: 'Courier New', Courier, monospace;
+  font-family: 30px;
+  font-weight: 900;
+}
+
+.main-menu ul li a:hover {
+  background-color: #555555;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .header-container {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .main_about-text {
+      padding: 0 10px;
+  }
+
+  .main-menu {
+      margin-top: 20px;
+  }
+
+  .main-menu ul li {
+      display: inline-block;
+      margin: 10px 0;
+  }
+}
+.parrafo-header{
+  color:rgba(255, 255, 255, 0.58);
+  white-space:pre-wrap;
+}
+
+.parrafo-header::first-letter{
+  initial-letter: 4;
+    margin-right: 10px;
+    color:#48e
+}
+p{
+  font-size: 24px;
+}
+/*######## FIN DE HEADER ##################*/
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: white;
+      }
+      
+      form {
+        max-width: 400px;
+        width: 100%;
+        background-color: rgba(68, 136, 238, 0.514);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin:auto;
+      }
+      
+      form label {
+        font-weight: bold;
+        color: white;
+      }
+      
+      form input[type="text"],
+      form input[type="email"],
+      form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+      
+      form input[type="file"] {
+        margin-top: 5px;
+        margin-bottom: 10px;
+      }
+      
+      form button[type="submit"] {
+        background-color: #fff;
+        color: black;
+        border: none;
+        padding: 10px 158px;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 24px;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight:900;
+        color:rgba(0, 0, 0, 0.639);
+       
+      }
+      
+      form button[type="submit"]:hover {
+        background-color: #2556b3;
+        color:white;
+      }
+      footer{display:none}
+      
+        </style>        
+</head>
+<nav class="main-menu">
+            
+
+  <ul>       
+    
+      <li><a href="{% url 'inicio'%}"  tarjet=blank >Home</a></li>
+     
+  </ul>
+
+</nav>  
+<body>
+    
+  <form method="post"><h2>Enviar Email</h2>
+    {% csrf_token %}
+    <div>
+        <label for="{{ form.name.id_for_label }}">Nombre:</label>
+        {{ form.name }}
+    </div>
+    <div>
+        <label for="{{ form.email.id_for_label }}">Email:</label>
+        {{ form.email }}
+    </div>
+    <div>
+        <label for="{{ form.phone.id_for_label }}">Telefono:</label>
+        {{ form.phone }}
+    </div>
+    <div>
+        <label for="{{ form.message.id_for_label }}">Mensaje:</label>
+        {{ form.message }}
+    </div>
+    <button type="submit">Enviar</button>
+</form>
+    </form>
+  
+    
+</body>
+</html>

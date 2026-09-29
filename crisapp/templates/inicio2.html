@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    {{ form.media }} <!--DJANGO CAPCHA-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="CHRISTHIAN STEPHEN">
+    <title>Proyecto Digital  Desarrollo de Paginas y Aplicaciones Web Puerto Vallarta y todo Mexico</title>
+
+    <meta name="programador" content="christian stephen">
+    <meta name="description" content="Proyecto Digital | Desarrollo de páginas web y aplicaciones personalizadas que reflejan los valores de tu negocio |paginas web puerto vallarta Creamos soluciones digitales únicas, comprometidos con la excelencia técnica y ética. Impacta positivamente en línea con nuestros proyectos a medida.">
+
+    <meta name="keywords" content="Desarrollo de páginas web, Aplicaciones web,paginas web puerto vallarta, Desarrollador web Puerto Vallarta, Diseño web personalizado, Programación web, Creación de sitios web, Desarrollo digital, Expertos en desarrollo y hosting web, Soluciones digitales para negocios, Diseño y desarrollo web, Páginas web a medida, Servicios web en Puerto Vallarta">
+
+    <meta name="robots" content="index, follow">
+    <meta name="title" content="Desarrollo de paginas y aplicaciones Web 100% Personalizado | Métodos y Diseño Personalizado Dependiendo de las Necesidades de Tu negocio">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Puerto Vallarta Web Developer">
+    <meta property="og:description" content="Proyecto Digital Desarrollo de paginas y aplicaciones web dedicado a crear sitios y aplicaciones que reflejen los valores y principios de tu negocio por medio del mundo digital. Comprometido con la excelencia técnica y la integridad ética en cada proyecto, utilizando mis habilidades para impactar positivamente en línea con mi trabajo.">
+    <meta property="og:image" content="/static/images/proyecto_digital2.webp" type="image/webp">
+     <link rel="icon"             href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon"    href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <!-- Structured Data for Google (optional) -->
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebPage",
+        "name": "Proyecto Digital | Desarrollo de páginas web y aplicaciones personalizadas",
+        "description": "Proyecto Digital | Desarrollo de páginas web y aplicaciones personalizadas para tu negocio.",
+        "image": "https://webdevelopermx.com/static/images/turquesa.com.webp"
+    }
+    </script>
+
+    <link rel="icon" href="{% static '/images/logo_proyecto_digital.ico' %}" type="image/.ico">
+
+    <link rel="stylesheet" href="{% static '/css/author.css' %}">
+    <link rel="stylesheet" href="{% static '/css/fuentes.css' %}"> <!-- Esto es para cargar fuentes nuevas -->    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><!--ESTO ES PARA LOS LOGOS DE REDES-->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" /><!--ICONOS GG-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script>
+        // Evita que el navegador restaure el scroll donde quedó antes de recargar
+        // (esto es lo que provocaba el salto hacia el footer en móvil)
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+    </script>
+
+</head>
+<body>
+    <div class="logo animate-on-scroll zoom-in">
+                <img  src="/static/images/logo_negro.webp" loading="lazy" title="Logo Proyecto Digital" alt="Proyecto Digital Puerto Vallarta">
+                </div>
+        
+    <header class="animate-on-scroll slide-down">      
+                
+                <nav>
+                    
+                    <ul>
+                        
+                        <li style="display:block;text-align: center;"class="animate-on-scroll zoom-in delay-1"><p style="font-size: 10px !important; color:#ccc;text-align: center;opacity: .5;">Herramienta Gratuita</p><a  href="{%url 'generar_qr'%}">Generar Codigo QR</a></li>
+                        <li style="display:block;text-align: center;" class="animate-on-scroll zoom-in delay-2"><p style="font-size: 10px !important; color:#ccc;text-align: center;opacity: .5;">Herramienta Gratuita</p><a href="{%url 'convertir_imagenes'%}">Convertir imagenes</a></li>
+                                                       
+                        <li class="animate-on-scroll zoom-in delay-4"><a href="#contacto">CONTACT</a></li>
+                         <li class="animate-on-scroll zoom-in delay-4"><a href="{%url 'about_us'%}">About Us</a></li>
+                    </ul>
+                </nav>
+
+
+                 <div class="mensaje_alerta">
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div  class="alert alert-{{ message.tags }}">
+                            {{ message }}
+
+                    {% endfor %}
+                    {% endif %}
+                </div>
+        </div>
+    </header>
+
+
+<div>
+    <section id="sobre" class="animate-on-scroll fade-in delay-1">
+        <h1>Proyecto Digital | Páginas Web Puerto Vallarta | desarrollo de páginas web profesionales 100% personalizadas</h1>
+        {% comment %}
+        <p>Lo primero que hacen los turistas para encontrar lo que necesitan es ir a Google y buscarlo...</p>
+        {% endcomment %}
+    </section>
+ <!-- GOOGLE TRANSLATOR-->
+            <div id="google_translate_element" class="animate-on-scroll zoom-in delay-2"><img src="{%static 'images/flag.webp'%}" loading="lazy" alt="Traductor"></div>
+            <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                pageLanguage: 'es', // Default page language
+                includedLanguages: 'en,es,fr,de,it,pt', // Languages you want to support
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE // or InlineLayout.DROPDOWN
+                }, 'google_translate_element');
+            }
+            </script>
+            <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        </div> <!-- FIN DIV GOOGLE TRANSLATOR-->
+
+</div>
+
+<!-- ============================================
+     🛠️ SECCIÓN SERVICIOS (reemplaza "Tu Negocio")
+     ============================================ -->
+<section id="servicios" class="animate-on-scroll fade-in delay-1" style="max-width:1100px;">
+    <h2>Soluciones Digitales Para Tu Negocio</h2>
+    <p>
+        Desarrollo web profesional y soluciones digitales para todo tipo de empresas e instituciones. Creamos páginas web, sistemas de reservaciones tipo Airbnb, plataformas de pedidos tipo Uber Eats, tiendas online, landing pages y bases de datos personalizadas para cualquier tipo de negocio. También desarrollamos menús y catálogos digitales con código QR, además de diseño gráfico profesional para posters, stickers, tarjetas de presentación y letreros comerciales.
+    </p>
+</section>
+
+<div class="servicios-grid">
+    <div class="servicio-card animate-on-scroll zoom-in delay-1">
+        <i class="fas fa-globe"></i>
+        <h3>Páginas Web Profesionales</h3>
+        <p>Sitios 100% personalizados, responsivos y optimizados para SEO, diseñados para reflejar la identidad de tu negocio.</p>
+    </div>
+    <div class="servicio-card animate-on-scroll zoom-in delay-2">
+        <i class="fas fa-calendar-check"></i>
+        <h3>Sistemas de Reservaciones</h3>
+        <p>Plataformas tipo Airbnb con disponibilidad en tiempo real, calendarios personalizados y pagos en línea integrados.</p>
+    </div>
+    <div class="servicio-card animate-on-scroll zoom-in delay-3">
+        <i class="fas fa-utensils"></i>
+        <h3>Plataformas de Pedidos</h3>
+        <p>Sistemas tipo Uber Eats para restaurantes y negocios, con carrito, pagos y panel de administración de pedidos.</p>
+    </div>
+    <div class="servicio-card animate-on-scroll zoom-in delay-4">
+        <i class="fas fa-store"></i>
+        <h3>Tiendas en Línea</h3>
+        <p>E-commerce completo con inventario, pagos seguros y gestión de productos desde un panel intuitivo.</p>
+    </div>
+   <div class="servicio-card animate-on-scroll zoom-in delay-5">
+         <img style="width:60px"src="{% static '/images/drone.webp'%}">
+        <h3>Videos con Dron</h3>
+        <p>Tomas aéreas y videos promocionales con dron para mostrar tu negocio, propiedad o evento desde una perspectiva única.</p>
+    </div>
+    <div class="servicio-card animate-on-scroll zoom-in delay-6">
+        <i class="fas fa-database"></i>
+        <h3>Bases de Datos Personalizadas</h3>
+        <p>Sistemas a la medida para gestionar clientes, inventarios, membresías o cualquier proceso interno de tu negocio.</p>
+    </div>
+    <div class="servicio-card animate-on-scroll zoom-in delay-7">
+        <i class="fas fa-qrcode"></i>
+        <h3>Menús y Catálogos con QR</h3>
+        <p>Menús digitales y catálogos accesibles al instante mediante código QR, sin necesidad de imprimir.</p>
+    </div>
+    <div class="servicio-card animate-on-scroll zoom-in delay-8">
+        <i class="fas fa-paint-brush"></i>
+        <h3>Diseño Gráfico</h3>
+        <p>Posters, stickers, tarjetas de presentación y letreros comerciales con un diseño profesional y coherente con tu marca.</p>
+    </div>
+    <div class="servicio-card animate-on-scroll zoom-in delay-9">
+        <i class="fas fa-credit-card"></i>
+        <h3>Integración de Pagos en Línea</h3>
+        <p>Stripe y otras pasarelas integradas directamente en tu sitio, con comisiones bajas y pagos seguros.</p>
+    </div>
+    <div class="servicio-card animate-on-scroll zoom-in delay-10">
+        <i class="fas fa-chart-line"></i>
+        <h3>SEO y Posicionamiento</h3>
+        <p>Optimización técnica y de contenido para que tu negocio aparezca en los primeros resultados de Google.</p>
+    </div>
+    <div class="servicio-card animate-on-scroll zoom-in delay-11">
+        <i class="fas fa-tools"></i>
+        <h3>Mantenimiento y Soporte</h3>
+        <p>Actualizaciones, respaldos y soporte continuo para que tu sitio siempre funcione sin contratiempos.</p>
+    </div>
+    <div class="servicio-card animate-on-scroll zoom-in delay-12">
+        <i class="fas fa-server"></i>
+        <h3>Hosting y Dominios</h3>
+        <p>Gestión de dominio, hosting y despliegue, para que tú solo te preocupes de tu negocio.</p>
+    </div>
+</div>
+
+<div class="cta-servicios animate-on-scroll zoom-in delay-2">
+    <p>¿Listo para llevar tu negocio al siguiente nivel?</p>
+    <a href="#contacto" class="cta-button">Contáctar Ahora</a>
+</div>
+
+<!-- ============================================
+     📁 PORTAFOLIO REORGANIZADO
+     ============================================ -->
+<div class="overlay-section animate-on-scroll fade-in delay-1">
+<section id="portfolio-header" style="max-width:1100px;">
+    <h2>Algunos de nuestros proyectos realizados</h2>
+    <p>Estos son algunos de los proyectos que hemos desarrollado para negocios e instituciones en Puerto Vallarta y en distintas partes del mundo.</p>
+</section>
+{%comment%}
+<div class="filtros-portfolio">
+    <button class="filtro-btn activo" data-filtro="todos">Todos</button>
+    <button class="filtro-btn" data-filtro="hospedaje">Hospedaje y Reservaciones</button>
+    <button class="filtro-btn" data-filtro="bienes-raices">Bienes Raíces</button>
+    <button class="filtro-btn" data-filtro="restaurantes">Restaurantes y Pedidos</button>
+    <button class="filtro-btn" data-filtro="tiendas">Tiendas en Línea</button>
+    <button class="filtro-btn" data-filtro="ong">ONG y Fundaciones</button>
+    <button class="filtro-btn" data-filtro="arte">Arte y Cultura</button>
+    <button class="filtro-btn" data-filtro="servicios">Servicios Profesionales</button>
+    <button class="filtro-btn" data-filtro="comunidades">Comunidades e Instituciones</button>
+</div>
+{%endcomment%}
+</div>
+
+<div class="portfolio-grid">
+{% if proyectos %}
+    {% for proyecto in proyectos %}
+    <article class="project-card animate-on-scroll {% cycle 'slide-left' 'slide-right' %} {% cycle 'delay-1' 'delay-2' 'delay-3' 'delay-4' %}"
+             data-category="{{ proyecto.categoria }}"
+             style="border-top-color: {{ proyecto.color_acento }};">
+              <a href="{{ proyecto.url }}" target="_blank">
+        <img src="{{ proyecto.imagen.url }}" loading="lazy" onclick="openModal(this.src)" alt="{{ proyecto.nombre }}">
+        <div class="project-card-body">
+            <span class="project-tag" style="background-color: {{ proyecto.color_acento }}; color: {{ proyecto.color_texto }};">
+                {{ proyecto.get_categoria_display }}
+            </span>
+            <h3 class="dominio">{{ proyecto.dominio }}</h3>
+            <p class="desc">{{ proyecto.descripcion }}</p> </a>
+            <a href="{{ proyecto.url }}" target="_blank" class="project-tag"style="background-color: {{ proyecto.color_acento }}; color: {{ proyecto.color_texto }};width:150px;">Visitar sitio </a>
+        </div>
+    </article>
+    {% endfor %}
+{% endif %}
+
+    
+</div>
+
+
+        <form method="post" id="contacto" class="animate-on-scroll slide-up delay-2" action="{%url 'enviar_email'%}">
+            <p>Si tienes preguntas, comentarios o deseas más información sobre nuestros servicios...</p>
+            {% csrf_token %}
+            <div>
+                {#<label for="{{ form.name.id_for_label }}">Nombre:</label>#}
+                {{ form.name }}
+            </div>
+            <div>
+                {#<label for="{{ form.email.id_for_label }}">Correo Electrónico:</label>#}
+                {{ form.email }}
+            </div>
+            <div>
+                {#<label for="{{ form.phone.id_for_label }}">Número de Teléfono:</label>#}
+                {{ form.phone }}
+            </div>
+            <div>
+                {#<label for="{{ form.message.id_for_label }}">Mensaje:</label>#}
+                {{ form.message }}
+            </div>
+
+            {# Captcha invisible — no afecta el diseño #}
+            {{ form.captcha }}
+
+            <button type="submit">Enviar</button>
+
+                        <h4 style="font-size:12px;color: rgba(255,255,255,0.5);font-family:san-serif; ; text-align: center; margin-top: 10px;">
+                Este sitio está protegido por reCAPTCHA. Aplican la
+                <a href="https://policies.google.com/privacy" target="_blank" style="color:#fff;">Política de Privacidad</a>
+                y los
+                <a href="https://policies.google.com/terms" target="_blank" style=" color:#fff;">Términos de Servicio</a>
+                de Google.
+                        </h4>
+        </form>
+
+        <footer id="footer" class="animate-on-scroll fade-in delay-1">
+
+
+            <p id="footer-copy">&copy; 2024 Proyecto Digital. Todos los derechos reservados.</p>
+
+            <p id="footer-contact">
+                Contactanos:
+                <a href="enviar_email" id="footer-email"style="color:#ccc">proyectodigitalmexico@gmail.com</a> |
+                <span style="color:#ccc" id="footer-phone">+1 (615) 938-0458</span>
+            </p>
+
+            <div id="social-links">
+                <a href="https://wa.me/+16159380458" target="_blank" id="whatsapp-link">WhatsApp</a>
+                <a href="https://www.facebook.com/profile.php?id=61553413180841" target="_blank" id="facebook-link">Facebook</a>
+                <a href="https://www.webdevelopermx.com" target="_blank" id="website-link">Website</a>
+            </div>
+
+            <div id="social-icons">
+                <a href="https://wa.me/+16159380458" target="_blank" id="whatsapp-icon"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61553413180841" target="_blank" id="facebook-icon"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.webdevelopermx.com" target="_blank" id="website-icon"><i class="fas fa-globe"></i></a>
+            </div>
+
+            <p id="footer-links">
+                <a href="politica_privacidad" id="privacy-policy-link">Politica de Privacidad</a> |
+                <a href="terminos_condiciones" id="terms-of-service-link">Terminos del Servicio</a>
+            </p>
+
+            <p id="footer-quick-links">
+                <a href="{% url 'about_us' %}" id="about-link">Acerca de Nosotros</a> |
+                <a href="#servicios" id="services-link">Servicios</a>
+            </p>
+
+            <form id="newsletter-form" action="{% url 'subscribe' %}" method="POST">
+                {% csrf_token %}
+                <label for="newsletter-email" id="newsletter-email-label">Subscribe to our newsletter</label>
+                <input type="text" name="website" style="display:none !important" tabindex="-1" autocomplete="off">
+                 <input type="text" name="nombre" placeholder="Your name" required aria-label="Name">
+                <input type="email" name="email" id="newsletter-email" placeholder="Enter your email" required>
+
+                
+                <button type="submit" id="newsletter-button">Subscribe</button>
+
+                 <h4 style="font-size:12px;color: rgba(255,255,255,0.5);font-family:san-serif; ; text-align: center; margin-top: 10px;">
+                Este sitio está protegido por reCAPTCHA. Aplican la
+                <a href="https://policies.google.com/privacy" target="_blank" style="color:#fff;">Política de Privacidad</a>
+                y los
+                <a href="https://policies.google.com/terms" target="_blank" style=" color:#fff;">Términos de Servicio</a>
+                de Google.
+                        </h4>
+            </form>
+        </footer>
+
+</div> <!-- CIERRE DIV BODY-->
+
+
+    <!-- ============================================
+         🚀 JAVASCRIPT MEJORADO - ANIMACIONES CON SCROLL
+         ============================================ -->
+    <script>
+        // Aseguramos que la página siempre inicie arriba al recargar
+        window.addEventListener('load', function() {
+            window.scrollTo(0, 0);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            window.scrollTo(0, 0);
+
+            // Configuración del Intersection Observer
+            const observerOptions = {
+                threshold: 0.15,  // 15% del elemento debe estar visible
+                rootMargin: '0px 0px -50px 0px'  // Comienza un poco antes
+            };
+            
+            // Crear el observer con mejor performance
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    // Si el elemento está en el viewport
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        
+                        // ✅ Dejar de observar después de animar (mejor performance)
+                        // Comenta esta línea si quieres que anime cada vez que entra
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // Observar todos los elementos con la clase animate-on-scroll
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            animatedElements.forEach(el => observer.observe(el));
+            
+            // 🆕 Limpiar observer cuando se cierre la página (mejor performance)
+            window.addEventListener('beforeunload', () => {
+                observer.disconnect();
+            });
+
+            // ============================================
+            // 🔍 FILTRO DE PORTAFOLIO POR CATEGORÍA
+            // ============================================
+            const filtroBtns = document.querySelectorAll('.filtro-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filtroBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filtroBtns.forEach(b => b.classList.remove('activo'));
+                    this.classList.add('activo');
+                    const filtro = this.dataset.filtro;
+
+                    projectCards.forEach(card => {
+                        if (filtro === 'todos' || card.dataset.category === filtro) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // 🆕 Debug mode (opcional - comentar en producción)
+            // console.log(`🎬 Observando ${animatedElements.length} elementos animados`);
+        });
+    </script>
+
+
+</body>
+</html>

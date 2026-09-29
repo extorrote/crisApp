@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You're Confirmed! | PV End of Summer Bash</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --mx-red: #ce1126;
+            --mx-green: #006341;
+            --cream: #fdf6ea;
+            --charcoal: #2b2620;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--cream);
+            background-image:
+                radial-gradient(circle at 15% 5%, rgba(206,17,38,0.05), transparent 35%),
+                radial-gradient(circle at 85% 95%, rgba(0,99,65,0.06), transparent 40%);
+            color: var(--charcoal);
+            font-family: "Nunito", sans-serif;
+            font-size: 1.1rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .caja {
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            background: rgba(255,255,255,0.6);
+            border: 3px solid var(--mx-green);
+            border-radius: 18px;
+            padding: 45px 35px;
+            box-shadow: 0 15px 40px rgba(43,38,32,0.2);
+        }
+
+        .caja .icono {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-family: "Baloo 2", sans-serif;
+            font-size: 1.9rem;
+            color: var(--mx-red);
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            font-weight: 700;
+            color: var(--mx-green);
+        }
+
+        a.volver {
+            display: inline-block;
+            margin-top: 20px;
+            font-family: "Baloo 2", sans-serif;
+            font-weight: 700;
+            color: #fff;
+            background: var(--mx-red);
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: background 0.25s ease;
+        }
+
+        a.volver:hover {
+            background: #a80d1f;
+        }
+    </style>
+</head>
+<body>
+    <div class="caja">
+        <div class="icono">🎉🇲🇽</div>
+        <h1>You're Confirmed!</h1>
+        <p>Thanks for RSVP'ing to the <span class="highlight">PV End of Summer Bash</span>.</p>
+        <p>See you <span class="highlight">September 25, 2026</span> at Casa Cuale, 5:00 – 10:00 PM.</p>
+        <p>Check your email for the address, directions, and your potluck dish assignment.</p>
+        <a href="{% url 'bash_invitation' %}" class="volver">Back to Invite</a>
+    </div>
+</body>
+</html>
